@@ -5,7 +5,7 @@ import { Compass, Target, Goal, CheckCircle } from 'lucide-react';
 
 const TrailGrid: React.FC = () => {
     return (
-        <section id="how-i-work" className="py-24 md:py-32 relative bg-[#121417] overflow-hidden">
+        <section id="how-i-work" className="py-12 md:py-16 relative bg-[#121417] overflow-hidden">
             <div className="max-w-[1400px] mx-auto px-6 relative z-10">
 
                 <div className="grid lg:grid-cols-2 gap-16 items-center">

@@ -105,13 +105,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
           >
             How I Work
           </a>
-          <a
-            href="#case-studies"
-            onClick={(e) => handleLandingLink(e, '#case-studies')}
-            className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
-          >
-            Proof
-          </a>
+
           <button
             onClick={() => onNavigate('resources')}
             className={`text-sm font-medium transition-colors ${(currentView === 'resources' || currentView === 'article') ? 'text-primary' : 'text-gray-400 hover:text-white'}`}
@@ -165,13 +159,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
               >
                 How I Work
               </a>
-              <a
-                href="#case-studies"
-                className="text-lg text-gray-300 hover:text-primary font-medium"
-                onClick={(e) => { handleLandingLink(e, '#case-studies'); setMobileMenuOpen(false); }}
-              >
-                Proof
-              </a>
+
               <button
                 onClick={() => { onNavigate('resources'); setMobileMenuOpen(false); }}
                 className={`text-lg text-left font-medium ${(currentView === 'resources' || currentView === 'article') ? 'text-primary' : 'text-gray-300'}`}

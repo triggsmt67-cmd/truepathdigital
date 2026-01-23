@@ -6,7 +6,7 @@ import { SOCIAL_LINKS } from '../constants/links';
 
 const AboutSection: React.FC = () => {
   return (
-    <section id="about" className="py-16 md:py-28 bg-[#121417] relative overflow-hidden border-t border-white/5">
+    <section id="about" className="py-10 md:py-16 bg-[#121417] relative overflow-hidden border-t border-white/5">
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-20 items-center">

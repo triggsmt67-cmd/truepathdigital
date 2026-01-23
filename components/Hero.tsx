@@ -29,7 +29,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-12 lg:py-0 border-b border-white/5 bg-[#121417]">
+    <section id="hero" className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-[110px] pb-6 lg:pt-[130px] lg:pb-12 border-b border-white/5 bg-[#121417]">
 
       {/* Spline 3D Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">

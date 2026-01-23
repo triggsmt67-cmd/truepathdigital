@@ -131,18 +131,24 @@ function App() {
             <Hero />
             <SectionSeparator number="01" title="REALITY CHECK" />
             <ComparisonSection />
+
+            <SectionSeparator number="02" title="GROWTH ENGINE" />
             <FeatureSplit />
             <QuoteSection />
+
+            <SectionSeparator number="03" title="THE MISSION" />
             <MissionSection />
-            <SectionSeparator number="02" title="INFRASTRUCTURE" />
+
+            <SectionSeparator number="04" title="INFRASTRUCTURE" />
             <Solutions />
-            <SectionSeparator number="03" title="THE PROTOCOL" />
+
+            <SectionSeparator number="05" title="THE PROTOCOL" />
             <TrailGrid />
-            <SectionSeparator number="04" title="PROOF OF CONCEPT" />
-            <SuccessStories />
-            <SectionSeparator number="05" title="THE CHOICE" />
+
+            <SectionSeparator number="06" title="THE CHOICE" />
             <StakesSection />
-            <SectionSeparator number="06" title="THE ARCHITECT" />
+
+            <SectionSeparator number="07" title="THE ARCHITECT" />
             <AboutSection />
           </>
         );

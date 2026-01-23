@@ -5,7 +5,7 @@ import { AlertCircle, Zap } from 'lucide-react';
 
 const ComparisonSection: React.FC = () => {
     return (
-        <section id="comparison" className="py-24 md:py-32 relative border-b border-white/5 bg-[#121417] overflow-hidden">
+        <section id="comparison" className="py-12 md:py-16 relative border-b border-white/5 bg-[#121417] overflow-hidden">
             {/* Subtle grid accent */}
             <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
