@@ -1,4 +1,7 @@
-const WP_ENDPOINT = import.meta.env.VITE_WP_GRAPHQL_ENDPOINT || 'https://admin.truepath406.com/graphql';
+const WP_ENDPOINT =
+  import.meta.env.VITE_WP_GRAPHQL_ENDPOINT ||
+  import.meta.env.VITE_WORDPRESS_API_URL ||
+  'https://admin.truepath406.com/graphql';
 
 export async function wpQuery<T>(query: string, variables: Record<string, any> = {}): Promise<T> {
   try {
