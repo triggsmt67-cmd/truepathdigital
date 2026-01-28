@@ -53,14 +53,14 @@ const Solutions: React.FC = () => {
                         transition={{ duration: 0.6 }}
                         className="text-4xl md:text-5xl lg:text-6xl font-semibold text-white mb-6 tracking-tight"
                     >
-                        Help with Items
+                        Strategic Infrastructure
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="text-lg md:text-xl text-gray-400 leading-relaxed max-w-2xl font-normal"
+                        className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl font-normal"
                     >
                         Clear decisions across your primary growth levers.
                     </motion.p>
@@ -92,7 +92,7 @@ const Solutions: React.FC = () => {
                                 <h3 className="text-2xl font-medium text-white mb-4 group-hover:text-primary transition-colors duration-300 tracking-tight">
                                     {solution.title}
                                 </h3>
-                                <p className="text-gray-400 leading-relaxed font-normal">
+                                <p className="text-gray-300 leading-relaxed font-normal">
                                     {solution.description}
                                 </p>
                             </div>
@@ -100,7 +100,7 @@ const Solutions: React.FC = () => {
                             {/* Tags List */}
                             <div className="space-y-3 pt-6 border-t border-white/5">
                                 {solution.tags.map((tag, i) => (
-                                    <div key={i} className="flex items-center gap-3 text-sm text-gray-400 group-hover:text-gray-200 transition-colors">
+                                    <div key={i} className="flex items-center gap-3 text-sm text-gray-300 group-hover:text-white transition-colors">
                                         <ArrowRight className="w-3.5 h-3.5 text-primary/50 group-hover:text-primary group-hover:translate-x-1 transition-all" />
                                         {tag}
                                     </div>

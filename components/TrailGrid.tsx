@@ -36,7 +36,7 @@ const TrailGrid: React.FC = () => {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="space-y-8"
                     >
-                        <div className="text-lg md:text-xl text-gray-400 leading-relaxed font-normal space-y-6">
+                        <div className="text-lg md:text-xl text-gray-300 leading-relaxed font-normal space-y-6">
                             <p>
                                 I start by understanding your buyer, your goals, and what already exists.
                             </p>
@@ -63,7 +63,7 @@ const TrailGrid: React.FC = () => {
                                     </div>
                                 ))}
                             </div>
-                            <span className="text-sm text-gray-500 font-mono">Supporting Montana owners today</span>
+                            <span className="text-sm text-gray-400 font-mono">Supporting Montana owners today</span>
                         </div>
                     </motion.div>
                 </div>

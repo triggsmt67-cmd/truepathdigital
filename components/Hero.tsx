@@ -76,7 +76,7 @@ const Hero: React.FC = () => {
             </motion.h1>
 
             {/* Subhead */}
-            <motion.p variants={itemVariants} className="text-lg md:text-2xl text-gray-400 mb-8 md:mb-10 max-w-2xl leading-relaxed font-normal">
+            <motion.p variants={itemVariants} className="text-lg md:text-2xl text-gray-300 mb-8 md:mb-10 max-w-2xl leading-relaxed font-normal">
               Clear thinking around paid ads, buyer behavior, and practical use of AI— so you stop guessing, stop wasting money, and feel confident again.
             </motion.p>
 
@@ -95,7 +95,7 @@ const Hero: React.FC = () => {
                 </span>
               </a>
 
-              <div className="flex items-center gap-2 text-sm text-gray-500">
+              <div className="flex items-center gap-2 text-sm text-gray-400">
                 <CheckCircle2 className="w-4 h-4 text-primary" />
                 <span>Direct partner access</span>
               </div>
@@ -183,7 +183,7 @@ const Hero: React.FC = () => {
 
               <div className="h-20 md:h-24 bg-[#121417]/40 border-t border-white/5 grid grid-cols-3 divide-x divide-white/5 backdrop-blur-md">
                 <div className="flex flex-col justify-center px-2 md:px-6 group/metric text-center md:text-left">
-                  <span className="text-[9px] md:text-[10px] text-gray-500 font-medium uppercase tracking-wider mb-1 group-hover/metric:text-white transition-colors">
+                  <span className="text-[9px] md:text-[10px] text-gray-400 font-medium uppercase tracking-wider mb-1 group-hover/metric:text-white transition-colors">
                     Wasted Spend
                   </span>
                   <div className="flex flex-col md:flex-row items-center gap-1 md:gap-2 justify-center md:justify-start">
@@ -194,7 +194,7 @@ const Hero: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex flex-col justify-center px-2 md:px-6 group/metric text-center md:text-left">
-                  <span className="text-[9px] md:text-[10px] text-gray-500 font-medium uppercase tracking-wider mb-1 group-hover/metric:text-white transition-colors">
+                  <span className="text-[9px] md:text-[10px] text-gray-400 font-medium uppercase tracking-wider mb-1 group-hover/metric:text-white transition-colors">
                     Buyer Trust
                   </span>
                   <div className="flex flex-col md:flex-row items-center gap-1 md:gap-2 justify-center md:justify-start">
@@ -205,7 +205,7 @@ const Hero: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex flex-col justify-center px-2 md:px-6 group/metric text-center md:text-left">
-                  <span className="text-[9px] md:text-[10px] text-gray-500 font-medium uppercase tracking-wider mb-1 group-hover/metric:text-white transition-colors">
+                  <span className="text-[9px] md:text-[10px] text-gray-400 font-medium uppercase tracking-wider mb-1 group-hover/metric:text-white transition-colors">
                     AI Output
                   </span>
                   <div className="flex flex-col md:flex-row items-center gap-1 md:gap-2 justify-center md:justify-start">

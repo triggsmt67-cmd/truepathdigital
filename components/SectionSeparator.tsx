@@ -31,7 +31,7 @@ const SectionSeparator: React.FC<SectionSeparatorProps> = ({ number, title }) =>
             {number}
           </span>
           <span className="w-px h-3 bg-white/20"></span>
-          <span className="text-[10px] font-mono font-medium text-gray-400 tracking-[0.2em] uppercase whitespace-nowrap">
+          <span className="text-[10px] font-mono font-medium text-gray-300 tracking-[0.2em] uppercase whitespace-nowrap">
             {title}
           </span>
         </div>

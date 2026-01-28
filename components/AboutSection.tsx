@@ -38,7 +38,7 @@ const AboutSection: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-7"
           >
-            <div className="flex items-center gap-2 mb-4 text-gray-500 font-mono text-xs md:text-sm uppercase tracking-widest font-medium">
+            <div className="flex items-center gap-2 mb-4 text-gray-400 font-mono text-xs md:text-sm uppercase tracking-widest font-medium">
               <MapPin className="w-4 h-4 text-primary" />
               <span>Credibility</span>
             </div>
@@ -47,7 +47,7 @@ const AboutSection: React.FC = () => {
               Decisions Over Hype.
             </h2>
 
-            <div className="space-y-6 text-lg md:text-xl text-gray-400 leading-relaxed mb-10 font-normal">
+            <div className="space-y-6 text-lg md:text-xl text-gray-300 leading-relaxed mb-10 font-normal">
               <p>
                 I’ve worked with <span className="text-white font-medium">Montana-based businesses</span> and currently support active clients
                 across paid growth, systems clarity, and decision-making during change.
@@ -57,14 +57,14 @@ const AboutSection: React.FC = () => {
                   <ShieldCheck className="w-6 h-6 text-primary shrink-0" />
                   <div>
                     <div className="text-white font-medium mb-1">Practical use of AI</div>
-                    <div className="text-sm text-gray-500">Automation that reduces effort, not creates confusion.</div>
+                    <div className="text-sm text-gray-400">Automation that reduces effort, not creates confusion.</div>
                   </div>
                 </div>
                 <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10 flex items-start gap-4">
                   <FileText className="w-6 h-6 text-primary shrink-0" />
                   <div>
                     <div className="text-white font-medium mb-1">Verified Strategy</div>
-                    <div className="text-sm text-gray-500">References and examples available by request.</div>
+                    <div className="text-sm text-gray-400">References and examples available by request.</div>
                   </div>
                 </div>
               </div>

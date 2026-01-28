@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2, TrendingUp, Activity, Terminal } from 'lucide-react';
 
 const FeatureSplit: React.FC = () => {
+  const [displayText, setDisplayText] = useState('');
+  const fullText = '> launch_growth_protocol';
+
+  useEffect(() => {
+    let currentText = '';
+    let index = 0;
+
+    const interval = setInterval(() => {
+      if (index < fullText.length) {
+        currentText += fullText[index];
+        setDisplayText(currentText);
+        index++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="py-8 md:py-12 bg-[#0F0F0F] relative overflow-hidden border-b border-white/5">
       {/* Ambient Background Lighting */}
@@ -44,8 +64,8 @@ const FeatureSplit: React.FC = () => {
           {/* Terminal Button */}
           <div className="inline-flex items-center gap-3 px-5 py-2.5 md:px-6 md:py-3 rounded-full bg-white/[0.03] border border-white/10 font-mono text-xs md:text-sm text-primary hover:bg-white/[0.08] transition-colors cursor-default shadow-lg ring-1 ring-white/5">
             <Terminal className="w-4 h-4" />
-            <span>
-              &gt; launch_growth_protocol<span className="animate-[pulse_1s_infinite]">_</span>
+            <span className="min-w-[180px]">
+              {displayText}<span className="animate-[pulse_1s_infinite]">_</span>
             </span>
           </div>
         </motion.div>

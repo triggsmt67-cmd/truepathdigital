@@ -28,7 +28,7 @@ const ComparisonSection: React.FC = () => {
                             <span className="text-xs font-mono uppercase tracking-[0.2em] text-red-500/70">Legacy Model</span>
                         </div>
                         <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">The Manual Trap</h3>
-                        <p className="text-gray-400 text-lg leading-relaxed mb-8">
+                        <p className="text-gray-300 text-lg leading-relaxed mb-8">
                             Spreadsheets, gut feelings, and 12-hour days. Traditional marketing is slow, messy, and unscalable. You're throwing budget into a black hole without clear attribution.
                         </p>
 

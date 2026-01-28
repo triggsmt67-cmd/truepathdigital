@@ -58,7 +58,7 @@ const StakesSection: React.FC = () => {
                 <Sparkles className="w-16 h-16 text-primary" />
               </div>
               <div className="space-y-6 relative z-10">
-                <p className="text-lg md:text-xl text-gray-400 font-normal leading-relaxed">
+                <p className="text-lg md:text-xl text-gray-300 font-normal leading-relaxed">
                   If you’re looking for someone to “just run ads,” I’m probably not the right fit.
                 </p>
                 <p className="text-xl md:text-2xl text-white font-medium leading-relaxed">

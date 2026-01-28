@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const QuoteSection: React.FC = () => {
   return (
-    <section className="py-8 md:py-12 bg-[#080808] relative flex justify-center items-center border-b border-white/5 overflow-hidden">
+    <section className="pt-12 pb-6 md:pt-16 md:pb-8 bg-[#080808] relative flex justify-center items-center border-b border-white/5 overflow-hidden">
       {/* Background Ambience */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 blur-[100px] rounded-full pointer-events-none" />
 
@@ -26,7 +26,7 @@ const QuoteSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-base md:text-lg text-gray-500 font-sans font-normal tracking-wider uppercase"
+          className="text-base md:text-lg text-gray-400 font-sans font-normal tracking-wider uppercase"
         >
           — Joe Sparano
         </motion.p>

@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 
 const MissionSection: React.FC = () => {
     return (
-        <section className="py-10 md:py-16 bg-background relative overflow-hidden">
+        <section className="pt-6 pb-12 md:pt-8 md:pb-20 bg-background relative overflow-hidden">
             <div className="max-w-[1400px] mx-auto px-6 md:px-12">
                 <div className="max-w-4xl mx-auto">
-                    <div className="text-xs font-medium text-gray-600 mb-8 uppercase tracking-widest border-l border-primary pl-4">Introduction</div>
+                    <div className="text-xs font-medium text-gray-400 mb-8 uppercase tracking-widest border-l-2 border-primary pl-4">Introduction</div>
 
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
@@ -15,10 +15,10 @@ const MissionSection: React.FC = () => {
                         viewport={{ once: true, margin: "-10%" }}
                         transition={{ duration: 0.8 }}
                     >
-                        <h2 className="text-xl md:text-3xl lg:text-4xl font-normal leading-tight tracking-tight text-white/50 text-left mb-8">
+                        <h2 className="text-xl md:text-3xl lg:text-4xl font-normal leading-tight tracking-tight text-white/60 text-left mb-8">
                             Most marketing problems <span className="text-white font-medium">don’t start with the platform.</span>
                         </h2>
-                        <div className="space-y-6 text-lg md:text-2xl text-gray-400 leading-relaxed font-normal">
+                        <div className="space-y-6 text-lg md:text-2xl text-gray-300 leading-relaxed font-normal">
                             <p>
                                 They start with unclear buyers, noisy advice, and too many tools doing too little.
                                 AI has made execution easier than ever—but it’s also made decision-making harder.

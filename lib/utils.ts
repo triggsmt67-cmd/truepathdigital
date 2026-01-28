@@ -10,9 +10,22 @@ export const decodeHtmlEntities = (text: string): string => {
     '&lsquo;': "'",
     '&ldquo;': '"',
     '&rdquo;': '"',
+    '&#8216;': "'",
     '&#8217;': "'",
+    '&#8218;': "'",
+    '&#8219;': "'",
+    '&#8220;': '"',
+    '&#8221;': '"',
+    '&#8222;': '"',
+    '&#8223;': '"',
     '&#8211;': "–",
     '&#8212;': "—",
+    '&ndash;': "–",
+    '&mdash;': "—",
+    '&amp;': "&",
+    '&lt;': "<",
+    '&gt;': ">",
+    '&#8230;': "...",
   };
   return text.replace(/&[a-z0-9#]+;/gi, (match) => entities[match] || match);
 };
@@ -153,150 +166,95 @@ import { NormalizedBlock } from '../types';
 
 /**
  * Advanced Render-Layer Normalization Agent
- * Transforms potentially messy WordPress blocks into a canonical, professional structure.
+ * Transforms WordPress HTML into a clean, canonical block structure.
+ * Preserves original flow while cleaning junk and improving readability.
  */
 export const normalizeBlogPost = (
   html: string,
   title: string,
+  excerpt: string = '',
   author: string = 'Trevor Riggs',
   date: string = 'Today'
 ): NormalizedBlock[] => {
   if (!html) return [];
 
+  // 1. Initial Cleaning (Remove Title/Excerpt duplicates from the start)
+  const cleanedHtml = cleanWpHtml(html, title, excerpt);
+
   const parser = new DOMParser();
-  const doc = parser.parseFromString(html, 'text/html');
+  const doc = parser.parseFromString(cleanedHtml, 'text/html');
   const body = doc.body;
 
-  // 1. Initial Block Extraction & Cleaning
+  // 2. Initial Block Extraction & Cleaning
   let rawBlocks: NormalizedBlock[] = Array.from(body.children).map(node => {
     const tagName = node.tagName.toLowerCase();
-    const textContent = (node.textContent || '').trim();
+    const textContent = decodeHtmlEntities((node.textContent || '').trim());
 
     if (tagName.startsWith('h')) {
-      return { type: 'heading', level: parseInt(tagName.substring(1)), content: textContent } as NormalizedBlock;
+      return {
+        type: 'heading',
+        level: parseInt(tagName.substring(1)) || 2,
+        content: textContent
+      } as NormalizedBlock;
     } else if (tagName === 'ul' || tagName === 'ol') {
-      const items = Array.from(node.querySelectorAll('li')).map(li => (li.textContent || '').trim());
+      const items = Array.from(node.querySelectorAll('li')).map(li =>
+        decodeHtmlEntities((li.textContent || '').trim())
+      );
       return { type: 'list', content: items } as NormalizedBlock;
     } else if (tagName === 'blockquote') {
       return { type: 'quote', content: textContent } as NormalizedBlock;
     } else {
-      return { type: 'paragraph', content: textContent } as NormalizedBlock;
-    }
-  }).filter(b => b.content.length > 0);
+      // Default to paragraph, but check for emphasis markers
+      const isEmphasis = textContent.length > 20 &&
+        textContent.length < 200 &&
+        (textContent.includes('!') || textContent.toLowerCase().includes('must') || textContent.toLowerCase().includes('crucial'));
 
-  // 2. Rule: Paragraph Length Control (Split > 350 chars)
-  const normalizedBlocks: NormalizedBlock[] = [];
+      return {
+        type: isEmphasis ? 'emphasis' : 'paragraph',
+        content: textContent
+      } as NormalizedBlock;
+    }
+  }).filter(b => {
+    if (Array.isArray(b.content)) return b.content.length > 0;
+    return b.content && b.content.length > 0;
+  });
+
+  // 2.5 Deduplication: Remove blocks that match title or excerpt within the first 3 blocks
+  const normTitle = normalizeText(title);
+  const normExcerpt = normalizeText(excerpt.replace(/\.\.\.$/, ''));
+
+  // Look at first 3 blocks to find duplicates of Title or Excerpt
+  for (let i = 0; i < Math.min(3, rawBlocks.length); i++) {
+    const blockText = normalizeText(typeof rawBlocks[i].content === 'string' ? (rawBlocks[i].content as string) : '');
+
+    if (
+      blockText === normTitle ||
+      blockText.length < 5 ||
+      (normExcerpt && (blockText.startsWith(normExcerpt) || normExcerpt.startsWith(blockText)))
+    ) {
+      rawBlocks.splice(i, 1);
+      i--; // Adjust index after removal
+    }
+  }
+
+  // 3. Paragraph Length Control (Split > 450 chars for better readability)
+  const finalBlocks: NormalizedBlock[] = [];
   rawBlocks.forEach(block => {
-    if (block.type === 'paragraph' && typeof block.content === 'string' && block.content.length > 350) {
+    if (block.type === 'paragraph' && typeof block.content === 'string' && block.content.length > 450) {
       const sentences = block.content.match(/[^.!?]+[.!?]+(?:\s|$)/g) || [block.content];
       let currentChunk = "";
       sentences.forEach(s => {
-        if ((currentChunk + s).length > 350) {
-          if (currentChunk) normalizedBlocks.push({ type: 'paragraph', content: currentChunk.trim() } as NormalizedBlock);
+        if ((currentChunk + s).length > 450) {
+          if (currentChunk) finalBlocks.push({ type: 'paragraph', content: currentChunk.trim() } as NormalizedBlock);
           currentChunk = s;
         } else {
           currentChunk += s;
         }
       });
-      if (currentChunk) normalizedBlocks.push({ type: 'paragraph', content: currentChunk.trim() } as NormalizedBlock);
+      if (currentChunk) finalBlocks.push({ type: 'paragraph', content: currentChunk.trim() } as NormalizedBlock);
     } else {
-      normalizedBlocks.push(block);
+      finalBlocks.push(block);
     }
-  });
-
-  // 3. Rule: Emphasis Block Extraction
-  const emphasisCandidates = normalizedBlocks.filter(b =>
-    b.type === 'paragraph' &&
-    typeof b.content === 'string' &&
-    b.content.length > 20 &&
-    b.content.length < 150 &&
-    (b.content.includes('!') || b.content.toLowerCase().includes('must') || b.content.toLowerCase().includes('real'))
-  );
-  const emphasisBlock = emphasisCandidates.length > 0 ? emphasisCandidates[0] : null;
-
-  // 4. Rule: Heading Normalization
-  let headings = normalizedBlocks.filter(b => b.type === 'heading');
-  if (headings.length === 0) {
-    // Infer H2s from transitional phrases or long sections
-    const transitionalIndex = normalizedBlocks.findIndex(b =>
-      b.type === 'paragraph' &&
-      typeof b.content === 'string' &&
-      /^(the real issue|what most people miss|here's the problem|in fact|but here)/i.test(b.content)
-    );
-    if (transitionalIndex !== -1) {
-      normalizedBlocks.splice(transitionalIndex, 0, { type: 'heading', level: 2, content: "The Core Mechanism" } as NormalizedBlock);
-    }
-  }
-
-  // 5. Canonical Assembly
-  const finalBlocks: NormalizedBlock[] = [];
-
-  // 1. H1 Article Title
-  finalBlocks.push({ type: 'heading', level: 1, content: title } as NormalizedBlock);
-
-  // 2. Context Subhead (Inferred from first paragraph)
-  const paragraphs = normalizedBlocks.filter(b => b.type === 'paragraph');
-  const firstPara = paragraphs[0];
-  let hookStartIndex = 0;
-
-  if (firstPara && typeof firstPara.content === 'string' && firstPara.content.length < 250) {
-    finalBlocks.push({ type: 'paragraph', content: firstPara.content } as NormalizedBlock);
-    hookStartIndex = 1;
-  }
-
-  // 3. Meta Line
-  const wordCount = body.textContent?.split(/\s+/).length || 0;
-  const readTime = Math.max(1, Math.ceil(wordCount / 200));
-  finalBlocks.push({ type: 'paragraph', content: `By ${author} • ${date} • ${readTime} min read` } as NormalizedBlock);
-
-  // 4. Opening Hook (next 2-4 paragraphs)
-  const hookParagraphs = paragraphs.slice(hookStartIndex, hookStartIndex + 3);
-  hookParagraphs.forEach(p => finalBlocks.push(p));
-
-  // 5. H2 — Define the problem
-  let problemH2 = normalizedBlocks.find(b => b.type === 'heading' && b.level === 2);
-  finalBlocks.push({
-    type: 'heading',
-    level: 2,
-    content: problemH2 ? (problemH2.content as string) : "The Problem with Conventional Approaches"
-  } as NormalizedBlock);
-
-  // 6. Problem Content
-  const problemContent = normalizedBlocks
-    .slice(5)
-    .filter(b => b.type === 'paragraph' || b.type === 'list')
-    .slice(0, 3);
-  problemContent.forEach(p => finalBlocks.push(p));
-
-  // 7. H2 — Explain the mechanism
-  finalBlocks.push({ type: 'heading', level: 2, content: "The Underlying Logic" } as NormalizedBlock);
-
-  // 8. Mechanism Content
-  const mechanismContent = normalizedBlocks
-    .slice(8)
-    .filter(b => b.type === 'paragraph')
-    .slice(0, 2);
-  mechanismContent.forEach(p => finalBlocks.push(p));
-
-  // 11. Emphasis Block
-  if (emphasisBlock) {
-    finalBlocks.push({ type: 'emphasis', content: emphasisBlock.content } as NormalizedBlock);
-  }
-
-  // 12. H2 — Practical guidance
-  finalBlocks.push({ type: 'heading', level: 2, content: "The Strategic Implementation" } as NormalizedBlock);
-
-  // 13. Practical Content
-  const practicalContent = normalizedBlocks
-    .slice(10)
-    .filter(b => b.type === 'paragraph' || b.type === 'list')
-    .slice(0, 4);
-  practicalContent.forEach(p => finalBlocks.push(p));
-
-  // 16. Soft Close
-  finalBlocks.push({
-    type: 'paragraph',
-    content: "True scale isn't found in more activity. It's found in better logic. The path is clear for those willing to look at the data."
   });
 
   return finalBlocks;

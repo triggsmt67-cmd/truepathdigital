@@ -60,10 +60,10 @@ const GET_POST_DETAIL = `
 `;
 
 const AIScanZone: React.FC<{ data?: Article['aiData'], isDarkMode: boolean }> = ({ data, isDarkMode }) => {
-  if (!data || (!data.aiQuickAnswer && !data.aiTakeaways?.length)) return null;
+  if (!data || (!data.aiQuickAnswer && !data.aiTakeaways?.length && !data.aiFaqs?.length)) return null;
 
   return (
-    <div className={`mb-16 rounded-3xl border overflow-hidden transition-all ${isDarkMode
+    <div className={`mb-10 rounded-3xl border overflow-hidden transition-all ${isDarkMode
       ? 'bg-primary/5 border-primary/20'
       : 'bg-primary/[0.03] border-primary/10 shadow-sm'
       }`}>
@@ -167,7 +167,7 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, isDarkMode, 
         const cleanEx = firstP.length > 5 ? firstP.trim() : cleanExcerpt(p.excerpt || '', title);
 
         // Advanced Normalization for Canonical Structure
-        const normalizedBlocks = normalizeBlogPost(p.content || '', title, 'Trevor Riggs', dateStr);
+        const normalizedBlocks = normalizeBlogPost(p.content || '', title, cleanEx, 'Trevor Riggs', dateStr);
 
         setFullArticle({
           slug: article.slug,
@@ -200,7 +200,7 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, isDarkMode, 
       case 'heading':
         if (block.level === 1) return null; // Already shown in hero
         const Tag = (block.level === 2 ? 'h2' : block.level === 3 ? 'h3' : 'h4') as 'h2' | 'h3' | 'h4';
-        const baseClass = "font-semibold tracking-tight mt-12 mb-6 transition-colors";
+        const baseClass = `font-semibold tracking-tight ${index === 0 ? 'mt-0' : 'mt-12'} mb-6 transition-colors`;
         const levelClass = block.level === 2 ? "text-3xl md:text-4xl" : "text-2xl md:text-3xl";
         const colorClass = isDarkMode ? "text-white" : "text-slate-900";
         return <Tag key={index} className={`${baseClass} ${levelClass} ${colorClass}`}>{block.content}</Tag>;
@@ -307,7 +307,7 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, isDarkMode, 
         </AnimatePresence>
       </button>
 
-      <section className="relative h-[60vh] md:h-[75vh] w-full overflow-hidden flex items-end pb-12 md:pb-24">
+      <section className="relative min-h-[60vh] md:min-h-[65vh] pt-32 w-full overflow-hidden flex items-end pb-8">
         <div className="absolute inset-0 z-0">
           <img src={fullArticle.image} alt={fullArticle.title} className={`w-full h-full object-cover transition-all duration-700 ${isDarkMode ? 'grayscale opacity-60' : 'opacity-80'}`} />
           <div className={`absolute inset-0 transition-colors duration-500 bg-gradient-to-t ${isDarkMode ? 'from-[#121417] via-[#121417]/60 to-transparent' : 'from-slate-50 via-slate-50/40 to-transparent'}`} />
@@ -324,13 +324,17 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, isDarkMode, 
               </span>
               <div className={`flex items-center gap-1.5 text-xs font-mono transition-colors ${isDarkMode ? 'text-gray-400' : 'text-slate-500'}`}><Clock className="w-3.5 h-3.5" /> {fullArticle.publishDate}</div>
             </div>
-            <h1 className={`text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tighter leading-[0.95] mb-6 max-w-4xl transition-colors ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{fullArticle.title}</h1>
-            <p className={`text-lg md:text-2xl font-normal leading-relaxed transition-colors ${isDarkMode ? 'text-gray-400' : 'text-slate-600'}`}>{fullArticle.excerpt}</p>
+            <h1 className={`text-4xl md:text-5xl lg:text-7xl font-bold tracking-tighter leading-[1.1] mb-6 max-w-4xl transition-colors ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{fullArticle.title}</h1>
+            {fullArticle.excerpt && (
+              <p className={`text-lg md:text-2xl font-normal leading-relaxed transition-colors max-w-3xl ${isDarkMode ? 'text-gray-400' : 'text-slate-600'}`}>
+                {fullArticle.excerpt}
+              </p>
+            )}
           </motion.div>
         </div>
       </section>
 
-      <section className="py-20 px-6 relative z-10">
+      <section className="pt-4 pb-20 px-6 relative z-10">
         <div className="max-w-[1400px] mx-auto grid lg:grid-cols-12 gap-16">
           <div className="lg:col-span-8">
             <AIScanZone data={fullArticle.aiData} isDarkMode={isDarkMode} />
