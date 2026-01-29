@@ -19,6 +19,7 @@ import SuccessStories from './components/SuccessStories';
 import ScrollTopProgress from './components/ScrollTopProgress';
 import { Compass } from 'lucide-react';
 import { ViewState, Article } from './types';
+import { useIntelligenceVault } from './hooks/useIntelligenceVault';
 
 const WipeOverlay = ({ isWiping }: { isWiping: boolean }) => {
   return (
@@ -68,6 +69,9 @@ function App() {
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
   const [isWiping, setIsWiping] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
+
+  // Prefetch Intelligence Vault Data
+  const { categories, posts, loading: vaultLoading } = useIntelligenceVault();
 
   // Transition Guard
   useEffect(() => {
@@ -120,11 +124,29 @@ function App() {
   const renderContent = () => {
     switch (currentView) {
       case 'resources':
-        return <ResourcesPage onNavigate={navigateWithWipe} isDarkMode={isDarkMode} onToggleTheme={() => setIsDarkMode(!isDarkMode)} />;
+        return (
+          <ResourcesPage
+            onNavigate={navigateWithWipe}
+            isDarkMode={isDarkMode}
+            onToggleTheme={() => setIsDarkMode(!isDarkMode)}
+            categories={categories}
+            posts={posts}
+            isLoading={vaultLoading}
+          />
+        );
       case 'article':
         return selectedArticle ? (
           <ArticleView article={selectedArticle} onBack={() => navigateWithWipe('resources')} isDarkMode={isDarkMode} onToggleTheme={() => setIsDarkMode(!isDarkMode)} />
-        ) : <ResourcesPage onNavigate={navigateWithWipe} isDarkMode={isDarkMode} onToggleTheme={() => setIsDarkMode(!isDarkMode)} />;
+        ) : (
+          <ResourcesPage
+            onNavigate={navigateWithWipe}
+            isDarkMode={isDarkMode}
+            onToggleTheme={() => setIsDarkMode(!isDarkMode)}
+            categories={categories}
+            posts={posts}
+            isLoading={vaultLoading}
+          />
+        );
       default:
         return (
           <>

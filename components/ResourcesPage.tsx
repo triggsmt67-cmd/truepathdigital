@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Search,
@@ -17,8 +17,6 @@ import {
   Sun,
   Moon
 } from 'lucide-react';
-import { wpQuery } from '../lib/gql';
-import { cleanExcerpt, parseTakeaways, parseFaqs } from '../lib/utils';
 import { Category, Article, ViewState } from '../types';
 import SectionSeparator from './SectionSeparator';
 import BlogIndexSidebar from './BlogIndexSidebar';
@@ -27,6 +25,9 @@ interface ResourcesPageProps {
   onNavigate: (view: ViewState, articleData?: Article) => void;
   isDarkMode: boolean;
   onToggleTheme: () => void;
+  categories: Category[];
+  posts: Article[];
+  isLoading: boolean;
 }
 
 const CATEGORY_ICON_MAP: Record<string, any> = {
@@ -39,158 +40,63 @@ const CATEGORY_ICON_MAP: Record<string, any> = {
   'case-studies': BookOpen,
 };
 
-const GET_CATEGORIES = `
-  query GetCategories {
-    categories(first: 20, where: { hideEmpty: true }) {
-      nodes {
-        id
-        databaseId
-        name
-        slug
-        description
-        count
-      }
-    }
-  }
-`;
-
-const GET_POSTS = `
-  query GetPosts($categorySlug: String) {
-    posts(where: { categoryName: $categorySlug }, first: 50) {
-      nodes {
-        id
-        databaseId
-        slug
-        title
-        excerpt(format: RENDERED)
-        date
-        featuredImage {
-          node {
-            sourceUrl(size: LARGE)
-          }
-        }
-        categories {
-          nodes {
-            name
-            slug
-          }
-        }
-        aiOverviews {
-          ai_overviews {
-            ai_quick_answer
-            ai_takeaways
-            ai_faqs
-          }
-        }
-      }
-    }
-  }
-`;
-
-const ResourcesPage: React.FC<ResourcesPageProps> = ({ onNavigate, isDarkMode, onToggleTheme }) => {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [posts, setPosts] = useState<Article[]>([]);
+const ResourcesPage: React.FC<ResourcesPageProps> = ({
+  onNavigate,
+  isDarkMode,
+  onToggleTheme,
+  categories,
+  posts,
+  isLoading
+}) => {
   const [selectedCategorySlug, setSelectedCategorySlug] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [postsLoading, setPostsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [postsLoading, setPostsLoading] = useState(false); // Kept for transition effect if needed, but mostly unused now
 
   const articleSectionRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    async function initVault() {
-      try {
-        setLoading(true);
-        const [catData, postData] = await Promise.all([
-          wpQuery<{ categories: { nodes: Category[] } }>(GET_CATEGORIES),
-          wpQuery<{ posts: { nodes: any[] } }>(GET_POSTS, { categorySlug: null })
-        ]);
-
-        setCategories(catData.categories.nodes);
-        setPosts(mapWpPostsToArticles(postData.posts.nodes));
-        setLoading(false);
-      } catch (err: any) {
-        setError(err.message || "Failed to establish connection to the Intelligence Vault.");
-        setLoading(false);
-      }
-    }
-    initVault();
-  }, []);
-
-  useEffect(() => {
-    if (loading) return;
-
-    async function fetchCategoryPosts() {
-      setPostsLoading(true);
-      try {
-        const postData = await wpQuery<{ posts: { nodes: any[] } }>(GET_POSTS, {
-          categorySlug: selectedCategorySlug
-        });
-        setPosts(mapWpPostsToArticles(postData.posts.nodes));
-      } catch (err) {
-        console.error("Post Fetch Error:", err);
-      } finally {
-        setPostsLoading(false);
-      }
-    }
-    fetchCategoryPosts();
-  }, [selectedCategorySlug, loading]);
-
-  const mapWpPostsToArticles = (wpNodes: any[]): Article[] => {
-    return wpNodes.map(node => {
-      const primaryCategory = node.categories?.nodes[0];
-      const title = node.title || 'Untitled Protocol';
-      const rawAi = node.aiOverviews?.ai_overviews;
-
-      return {
-        slug: node.slug,
-        databaseId: node.databaseId,
-        title: title,
-        excerpt: cleanExcerpt(node.excerpt || '', title),
-        readTime: '8 min',
-        category: primaryCategory?.name || 'Protocol',
-        categorySlug: primaryCategory?.slug || 'uncategorized',
-        image: node.featuredImage?.node?.sourceUrl || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80',
-        publishDate: new Date(node.date).toLocaleDateString('en-US', {
-          month: 'short',
-          day: 'numeric',
-          year: 'numeric'
-        }),
-        aiData: rawAi ? {
-          aiQuickAnswer: rawAi.ai_quick_answer || '',
-          aiTakeaways: parseTakeaways(rawAi.ai_takeaways || ''),
-          aiFaqs: parseFaqs(rawAi.ai_faqs || '')
-        } : undefined
-      };
-    });
-  };
-
   const handleCategoryClick = (slug: string) => {
     setSelectedCategorySlug(prev => prev === slug ? null : slug);
+    // Simulate a tiny loading state for UX (optional, can be removed for instant switch)
+    setPostsLoading(true);
     setTimeout(() => {
+      setPostsLoading(false);
       articleSectionRef.current?.scrollIntoView({
         behavior: 'smooth',
         block: 'start'
       });
-    }, 150);
+    }, 300);
+
   };
 
   const filteredPosts = useMemo(() => {
-    if (!searchQuery) return posts;
-    const q = searchQuery.toLowerCase();
-    return posts.filter(p =>
-      p.title.toLowerCase().includes(q) ||
-      p.excerpt.toLowerCase().includes(q) ||
-      p.category.toLowerCase().includes(q)
-    );
-  }, [posts, searchQuery]);
+    let result = posts;
+
+    // Filter by Category
+    if (selectedCategorySlug) {
+      result = result.filter(p =>
+        p.categorySlug === selectedCategorySlug ||
+        (p.allCategories && p.allCategories.includes(selectedCategorySlug))
+      );
+    }
+
+    // Filter by Search
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      result = result.filter(p =>
+        p.title.toLowerCase().includes(q) ||
+        p.excerpt.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q)
+      );
+    }
+
+    return result;
+  }, [posts, searchQuery, selectedCategorySlug]);
 
   const activeCategory = useMemo(() =>
     categories.find(c => c.slug === selectedCategorySlug),
     [selectedCategorySlug, categories]);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className={`min-h-screen flex flex-col items-center justify-center gap-6 transition-colors duration-500 ${isDarkMode ? 'bg-[#121417]' : 'bg-slate-50'}`}>
         <Loader2 className="w-12 h-12 text-primary animate-spin" />

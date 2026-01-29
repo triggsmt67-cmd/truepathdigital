@@ -21,7 +21,7 @@ import { Article } from '../types';
 import { SOCIAL_LINKS } from '../constants/links';
 import { wpQuery } from '../lib/gql';
 import { cleanExcerpt, cleanWpHtml, parseTakeaways, parseFaqs, normalizeBlogPost } from '../lib/utils';
-import DOMPurify from 'dompurify';
+
 
 interface ArticleViewProps {
   article: Article;
@@ -65,9 +65,9 @@ const AIScanZone: React.FC<{ data?: Article['aiData'], isDarkMode: boolean }> = 
   return (
     <div className={`mb-10 rounded-3xl border overflow-hidden transition-all ${isDarkMode
       ? 'bg-primary/5 border-primary/20'
-      : 'bg-primary/[0.03] border-primary/10 shadow-sm'
+      : 'bg-orange-50/50 border-orange-100/60 shadow-sm'
       }`}>
-      <div className="bg-primary/10 px-6 py-3 border-b border-primary/10 flex items-center gap-2">
+      <div className={`px-6 py-3 border-b flex items-center gap-2 ${isDarkMode ? 'bg-primary/10 border-primary/10' : 'bg-orange-100/50 border-orange-100'}`}>
         <Zap className="w-4 h-4 text-primary" />
         <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-primary">Protocol Summary (AI Generated)</span>
       </div>
@@ -94,7 +94,7 @@ const AIScanZone: React.FC<{ data?: Article['aiData'], isDarkMode: boolean }> = 
         )}
 
         {data.aiFaqs && data.aiFaqs.length > 0 && (
-          <div className={`pt-6 border-t ${isDarkMode ? 'border-white/5' : 'border-slate-200'}`}>
+          <div className={`pt-6 border-t ${isDarkMode ? 'border-white/5' : 'border-orange-100'}`}>
             <h4 className={`text-sm font-bold uppercase tracking-tighter mb-4 flex items-center gap-2 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
               <HelpCircle className="w-4 h-4 text-primary" />
               Quick Intelligence
@@ -161,12 +161,26 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, isDarkMode, 
         const dateStr = p.date ? new Date(p.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Unknown Date';
 
         // Extract full first paragraph for hero lead instead of truncated excerpt
+        // We look for the first non-empty paragraph tag in the content
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = p.content || '';
-        const firstP = tempDiv.querySelector('p')?.textContent || '';
-        const cleanEx = firstP.length > 5 ? firstP.trim() : cleanExcerpt(p.excerpt || '', title);
+
+        let firstP = '';
+        const paragraphs = tempDiv.querySelectorAll('p');
+        for (let i = 0; i < paragraphs.length; i++) {
+          const text = paragraphs[i].textContent || '';
+          // Ensure it's substantial enough to be a lead (avoiding empty spacers)
+          if (text.trim().length > 40) {
+            firstP = text.trim();
+            break;
+          }
+        }
+
+        // If no valid first paragraph found in content, fallback to cleaned excerpt
+        const cleanEx = firstP || cleanExcerpt(p.excerpt || '', title);
 
         // Advanced Normalization for Canonical Structure
+        // PASS cleanEx explicitly so normalizeBlogPost can remove it from validity blocks
         const normalizedBlocks = normalizeBlogPost(p.content || '', title, cleanEx, 'Trevor Riggs', dateStr);
 
         setFullArticle({
@@ -257,10 +271,10 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, isDarkMode, 
     const text = `Check out this technical blueprint: ${fullArticle?.title || article.title}`;
     switch (platform) {
       case 'twitter':
-        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`, '_blank');
+        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
         break;
       case 'linkedin':
-        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`, '_blank');
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
         break;
       case 'email':
         window.location.href = `mailto:?subject=${encodeURIComponent(fullArticle?.title || article.title)}&body=${encodeURIComponent(text + ' ' + shareUrl)}`;
@@ -307,7 +321,7 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, isDarkMode, 
         </AnimatePresence>
       </button>
 
-      <section className="relative min-h-[60vh] md:min-h-[65vh] pt-32 w-full overflow-hidden flex items-end pb-8">
+      <section className="relative min-h-[50vh] md:min-h-[55vh] pt-32 w-full overflow-hidden flex items-end pb-8">
         <div className="absolute inset-0 z-0">
           <img src={fullArticle.image} alt={fullArticle.title} className={`w-full h-full object-cover transition-all duration-700 ${isDarkMode ? 'grayscale opacity-60' : 'opacity-80'}`} />
           <div className={`absolute inset-0 transition-colors duration-500 bg-gradient-to-t ${isDarkMode ? 'from-[#121417] via-[#121417]/60 to-transparent' : 'from-slate-50 via-slate-50/40 to-transparent'}`} />
@@ -324,9 +338,14 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, isDarkMode, 
               </span>
               <div className={`flex items-center gap-1.5 text-xs font-mono transition-colors ${isDarkMode ? 'text-gray-400' : 'text-slate-500'}`}><Clock className="w-3.5 h-3.5" /> {fullArticle.publishDate}</div>
             </div>
-            <h1 className={`text-4xl md:text-5xl lg:text-7xl font-bold tracking-tighter leading-[1.1] mb-6 max-w-4xl transition-colors ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{fullArticle.title}</h1>
+            <h1 className={`text-4xl md:text-5xl lg:text-7xl font-bold tracking-tighter leading-[1.1] mb-8 max-w-4xl transition-colors ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{fullArticle.title}</h1>
+
+            <div className="max-w-4xl mb-12">
+              <AIScanZone data={fullArticle.aiData} isDarkMode={isDarkMode} />
+            </div>
+
             {fullArticle.excerpt && (
-              <p className={`text-lg md:text-2xl font-normal leading-relaxed transition-colors max-w-3xl ${isDarkMode ? 'text-gray-400' : 'text-slate-600'}`}>
+              <p className={`text-lg md:text-xl font-normal leading-relaxed transition-colors max-w-3xl ${isDarkMode ? 'text-gray-300' : 'text-slate-700'}`}>
                 {fullArticle.excerpt}
               </p>
             )}
@@ -334,10 +353,9 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, isDarkMode, 
         </div>
       </section>
 
-      <section className="pt-4 pb-20 px-6 relative z-10">
+      <section className="pt-6 pb-20 px-6 relative z-10">
         <div className="max-w-[1400px] mx-auto grid lg:grid-cols-12 gap-16">
           <div className="lg:col-span-8">
-            <AIScanZone data={fullArticle.aiData} isDarkMode={isDarkMode} />
 
             <div className={`prose prose-lg md:prose-xl max-w-none transition-all duration-300 ${isDarkMode
               ? 'prose-invert prose-orange text-gray-300'

@@ -53,4 +53,5 @@ export interface Article {
     aiTakeaways?: string[];
     aiFaqs?: { question: string; answer: string }[];
   };
+  allCategories?: string[];
 }
