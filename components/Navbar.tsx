@@ -105,6 +105,13 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
           >
             How I Work
           </a>
+          <a
+            href="#about"
+            onClick={(e) => handleLandingLink(e, '#about')}
+            className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
+          >
+            About
+          </a>
 
           <button
             onClick={() => onNavigate('resources')}
@@ -158,6 +165,13 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
                 onClick={(e) => { handleLandingLink(e, '#how-i-work'); setMobileMenuOpen(false); }}
               >
                 How I Work
+              </a>
+              <a
+                href="#about"
+                className="text-lg text-gray-300 hover:text-primary font-medium"
+                onClick={(e) => { handleLandingLink(e, '#about'); setMobileMenuOpen(false); }}
+              >
+                About
               </a>
 
               <button

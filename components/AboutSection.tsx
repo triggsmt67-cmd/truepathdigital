@@ -56,20 +56,20 @@ const AboutSection: React.FC = () => {
                 <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10 flex items-start gap-4">
                   <ShieldCheck className="w-6 h-6 text-primary shrink-0" />
                   <div>
-                    <div className="text-white font-medium mb-1">Practical use of AI</div>
+                    <div className="text-white font-medium mb-1">Where AI helps</div>
                     <div className="text-sm text-gray-400">Automation that reduces effort, not creates confusion.</div>
                   </div>
                 </div>
                 <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10 flex items-start gap-4">
                   <FileText className="w-6 h-6 text-primary shrink-0" />
                   <div>
-                    <div className="text-white font-medium mb-1">Verified Strategy</div>
+                    <div className="text-white font-medium mb-1">What’s been proven</div>
                     <div className="text-sm text-gray-400">References and examples available by request.</div>
                   </div>
                 </div>
               </div>
               <p>
-                If your marketing feels harder to trust lately, I’m open to a short conversation.
+                If your marketing feels harder to trust than it used to, I’m open to a short conversation.
               </p>
             </div>
 
