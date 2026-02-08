@@ -1,21 +1,12 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { BrowserRouter, Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import FeatureSplit from './components/FeatureSplit';
-import MissionSection from './components/MissionSection';
-import Solutions from './components/Solutions';
-import TrailGrid from './components/TrailGrid';
-import AboutSection from './components/AboutSection';
-import StakesSection from './components/StakesSection';
-import Footer from './components/Footer';
-import SectionSeparator from './components/SectionSeparator';
+import LandingPage from './components/LandingPage';
 import ResourcesPage from './components/ResourcesPage';
-import ArticleView from './components/ArticleView';
-import ComparisonSection from './components/ComparisonSection';
-import QuoteSection from './components/QuoteSection';
-import SuccessStories from './components/SuccessStories';
+import ArticlePage from './components/ArticlePage';
+import Footer from './components/Footer';
 import ScrollTopProgress from './components/ScrollTopProgress';
 import { Compass } from 'lucide-react';
 import { ViewState, Article } from './types';
@@ -64,13 +55,25 @@ const WipeOverlay = ({ isWiping }: { isWiping: boolean }) => {
   );
 };
 
-function App() {
-  const [currentView, setCurrentView] = useState<ViewState>('landing');
-  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+const AppContent = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Derived state for Navbar
+  const getCurrentView = (): ViewState => {
+    if (location.pathname.startsWith('/blog') && location.pathname.length > 5) return 'article';
+    if (location.pathname.startsWith('/blog') || location.pathname.startsWith('/insights')) return 'resources';
+    return 'landing';
+  };
+
+  const currentView = getCurrentView();
+
   const [isWiping, setIsWiping] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
 
   // Prefetch Intelligence Vault Data
+  // We pass these to ResourcesPage. ArticlePage uses the hook internally to find the article.
+  // Ideally we'd use a Context, but passing props is fine for now.
   const { categories, posts, loading: vaultLoading } = useIntelligenceVault();
 
   // Transition Guard
@@ -85,14 +88,19 @@ function App() {
 
   const navigateWithWipe = useCallback((view: ViewState, articleData?: Article) => {
     if (isWiping) return; // Guard against rapid clicks
+
+    // If we are already on the view, just scroll or ignore
+    // But for router, we might want to check path
     if (view === currentView && !articleData && window.scrollY < 100) return;
 
     setIsWiping(true);
 
     // Core view flip at the mid-point of the wipe
     const timer = setTimeout(() => {
-      setCurrentView(view);
-      if (articleData) setSelectedArticle(articleData);
+      if (view === 'landing') navigate('/');
+      else if (view === 'resources') navigate('/blog');
+      else if (view === 'article' && articleData) navigate(`/blog/${articleData.slug}`);
+
       window.scrollTo(0, 0);
     }, 400);
 
@@ -100,11 +108,7 @@ function App() {
       setIsWiping(false);
     }, 850);
 
-    return () => {
-      clearTimeout(timer);
-      clearTimeout(cleanup);
-    };
-  }, [isWiping, currentView]);
+  }, [isWiping, currentView, navigate]);
 
   const handleBackToTop = () => {
     if (isWiping) return;
@@ -119,62 +123,6 @@ function App() {
     setTimeout(() => {
       setIsWiping(false);
     }, 850);
-  };
-
-  const renderContent = () => {
-    switch (currentView) {
-      case 'resources':
-        return (
-          <ResourcesPage
-            onNavigate={navigateWithWipe}
-            isDarkMode={isDarkMode}
-            onToggleTheme={() => setIsDarkMode(!isDarkMode)}
-            categories={categories}
-            posts={posts}
-            isLoading={vaultLoading}
-          />
-        );
-      case 'article':
-        return selectedArticle ? (
-          <ArticleView article={selectedArticle} onBack={() => navigateWithWipe('resources')} isDarkMode={isDarkMode} onToggleTheme={() => setIsDarkMode(!isDarkMode)} />
-        ) : (
-          <ResourcesPage
-            onNavigate={navigateWithWipe}
-            isDarkMode={isDarkMode}
-            onToggleTheme={() => setIsDarkMode(!isDarkMode)}
-            categories={categories}
-            posts={posts}
-            isLoading={vaultLoading}
-          />
-        );
-      default:
-        return (
-          <>
-            <Hero />
-            <SectionSeparator number="01" title="REALITY CHECK" />
-            <ComparisonSection />
-
-            <SectionSeparator number="02" title="GROWTH ENGINE" />
-            <FeatureSplit />
-            <QuoteSection />
-
-            <SectionSeparator number="03" title="THE MISSION" />
-            <MissionSection />
-
-            <SectionSeparator number="04" title="INFRASTRUCTURE" />
-            <Solutions />
-
-            <SectionSeparator number="05" title="THE PROTOCOL" />
-            <TrailGrid />
-
-            <SectionSeparator number="06" title="THE CHOICE" />
-            <StakesSection />
-
-            <SectionSeparator number="07" title="THE ARCHITECT" />
-            <AboutSection />
-          </>
-        );
-    }
   };
 
   return (
@@ -194,20 +142,43 @@ function App() {
         <Navbar currentView={currentView} onNavigate={(view) => navigateWithWipe(view)} />
         <main>
           <AnimatePresence mode="wait">
-            <motion.div
-              key={currentView === 'article' ? `article-${selectedArticle?.slug}` : currentView}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              {renderContent()}
-            </motion.div>
+            <div key={location.pathname}>
+              <Routes location={location}>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/blog" element={
+                  <ResourcesPage
+                    onNavigate={navigateWithWipe}
+                    isDarkMode={isDarkMode}
+                    onToggleTheme={() => setIsDarkMode(!isDarkMode)}
+                    categories={categories}
+                    posts={posts}
+                    isLoading={vaultLoading}
+                  />
+                } />
+                <Route path="/blog/:slug" element={
+                  <ArticlePage
+                    isDarkMode={isDarkMode}
+                    onToggleTheme={() => setIsDarkMode(!isDarkMode)}
+                  />
+                } />
+                {/* Redirects */}
+                <Route path="/insights" element={<Navigate to="/blog" replace />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </div>
           </AnimatePresence>
         </main>
         <Footer />
       </div>
     </div>
+  );
+};
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 }
 

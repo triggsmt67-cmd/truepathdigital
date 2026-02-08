@@ -22,7 +22,7 @@ const AboutSection: React.FC = () => {
             <div className="absolute inset-0 bg-gradient-to-tr from-primary to-orange-600 rounded-2xl blur opacity-20 transform translate-x-2 translate-y-2"></div>
             <div className="relative rounded-2xl overflow-hidden border border-white/10 aspect-[4/5] group">
               <img
-                src="https://admin.truepath406.com/wp-content/uploads/2025/12/Gemini_Generated_Image_gqrc0ygqrc0ygqrc.jpg"
+                src="/images/about-trevor.jpg"
                 alt="Trevor Riggs, Founder"
                 className="w-full h-full object-cover filter grayscale contrast-125 group-hover:grayscale-0 transition-all duration-700"
               />

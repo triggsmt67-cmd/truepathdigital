@@ -59,7 +59,7 @@ const TrailGrid: React.FC = () => {
                             <div className="flex -space-x-3">
                                 {[1, 2, 3].map((i) => (
                                     <div key={i} className="w-10 h-10 rounded-full border-2 border-[#121417] bg-gray-800 overflow-hidden">
-                                        <img src={`https://i.pravatar.cc/150?u=${i + 10}`} alt="avatar" />
+                                        <img src={`/images/avatar-${i}.jpg`} alt="avatar" />
                                     </div>
                                 ))}
                             </div>
