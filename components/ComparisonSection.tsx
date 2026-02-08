@@ -5,78 +5,91 @@ import { AlertCircle, Zap } from 'lucide-react';
 
 const ComparisonSection: React.FC = () => {
     return (
-        <section id="comparison" className="py-12 md:py-16 relative border-b border-white/5 bg-[#121417] overflow-hidden">
-            {/* Subtle grid accent */}
-            <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
+        <section id="comparison" className="py-20 md:py-24 relative border-b border-white/5 bg-[#121417] overflow-hidden">
+            {/* Subtle Texture */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:32px_32px]"></div>
 
-            <div className="max-w-7xl mx-auto px-6">
-                <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center relative">
+            <div className="max-w-6xl mx-auto px-6">
+                <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-start relative">
 
                     {/* Vertical Divider (Desktop) */}
-                    <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/10 to-transparent -translate-x-1/2"></div>
+                    <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/5 to-transparent -translate-x-1/2"></div>
 
-                    {/* Left Side: The Problem (Legacy) */}
+                    {/* Left Side: The Reactive Loop (Problem) */}
                     <motion.div
-                        initial={{ opacity: 0, x: -20 }}
+                        initial={{ opacity: 0, x: -15 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                        className="flex flex-col justify-center opacity-60 hover:opacity-100 transition-opacity duration-500"
+                        transition={{ duration: 1, ease: "easeOut" }}
+                        className="flex flex-col justify-center pr-4 md:pr-12 text-opacity-80"
                     >
-                        <div className="flex items-center gap-3 mb-6">
-                            <AlertCircle className="w-5 h-5 text-red-500" />
-                            <span className="text-xs font-mono uppercase tracking-[0.2em] text-red-500/70">Legacy Model</span>
-                        </div>
-                        <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">The Manual Trap</h3>
-                        <p className="text-gray-300 text-lg leading-relaxed mb-8">
-                            Spreadsheets, gut feelings, and 12-hour days. Traditional marketing is slow, messy, and unscalable. You're throwing budget into a black hole without clear attribution.
-                        </p>
+                        <span className="text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] text-gray-500 mb-6 block">
+                            The Reactive Loop
+                        </span>
 
-                        {/* Minimal Metric */}
-                        <div className="flex items-center gap-4">
-                            <div className="h-1 bg-white/10 w-48 rounded-full overflow-hidden">
-                                <div className="h-full bg-red-600 w-[15%]"></div>
-                            </div>
-                            <div className="text-xs font-mono uppercase text-red-500 tracking-wider">
-                                15% Efficiency
-                            </div>
+                        <h3 className="text-2xl md:text-3xl font-medium text-white/90 mb-6 tracking-tight leading-tight">
+                            When Everything Feels Urgent, <br className="hidden md:block" />Nothing Feels Clear
+                        </h3>
+
+                        <div className="space-y-6 text-gray-400 font-light text-lg leading-relaxed">
+                            <p>
+                                Spreadsheets. Gut calls. Constant tweaks. <br />
+                                Most marketing doesn’t fail — it just never settles.
+                            </p>
+                            <p>
+                                When every metric demands attention, decisions get rushed. You stay busy, but clarity keeps slipping.
+                            </p>
                         </div>
+
+                        {/* Optional Subdued List */}
+                        <ul className="mt-8 space-y-3">
+                            {["Chasing metrics after the fact", "Changing tactics too often", "Decisions made under pressure"].map((item, i) => (
+                                <li key={i} className="flex items-center gap-3 text-sm text-gray-500">
+                                    <div className="w-1 h-1 rounded-full bg-gray-600"></div>
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
                     </motion.div>
 
-                    {/* Right Side: The Solution (Future) */}
+                    {/* Right Side: The True Path Protocol (Solution) */}
                     <motion.div
-                        initial={{ opacity: 0, x: 20 }}
+                        initial={{ opacity: 0, x: 15 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
-                        className="flex flex-col justify-center relative"
+                        transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+                        className="flex flex-col justify-center pl-0 md:pl-4 relative"
                     >
-                        {/* Ambient Glow */}
-                        <div className="absolute -left-20 top-1/2 -translate-y-1/2 w-64 h-64 bg-primary/10 blur-[100px] rounded-full pointer-events-none opacity-50"></div>
+                        {/* Soft Ambient Light */}
+                        <div className="absolute -left-20 top-0 w-96 h-96 bg-primary/5 blur-[120px] rounded-full pointer-events-none opacity-40"></div>
 
-                        <div className="flex items-center gap-3 mb-6">
-                            <Zap className="w-5 h-5 text-primary" />
-                            <span className="text-xs font-mono uppercase tracking-[0.2em] text-primary">True Path Protocol</span>
-                        </div>
-                        <h3 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">Applied Intelligence</h3>
-                        <p className="text-gray-300 text-lg leading-relaxed mb-8">
-                            Automated workflows. Real-time data. Precision targeting. We engineer the chaos out of your business so you can scale without the traditional growing pains.
-                        </p>
+                        <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-primary mb-6 block">
+                            The True Path Protocol
+                        </span>
 
-                        {/* Premium Metric */}
-                        <div className="flex items-center gap-4">
-                            <div className="h-1 bg-white/10 w-48 rounded-full overflow-hidden">
-                                <motion.div
-                                    initial={{ width: 0 }}
-                                    whileInView={{ width: '98%' }}
-                                    transition={{ duration: 2, ease: "easeOut" }}
-                                    className="h-full bg-primary shadow-[0_0_15px_rgba(255,107,0,0.8)]"
-                                />
-                            </div>
-                            <div className="flex items-center gap-2 text-primary">
-                                <span className="text-xs font-mono uppercase tracking-wider font-bold">98% Efficiency</span>
-                            </div>
+                        <h3 className="text-2xl md:text-3xl font-medium text-white mb-6 tracking-tight leading-tight">
+                            From Reaction to <br className="hidden md:block" />Reasoned Decisions
+                        </h3>
+
+                        <div className="space-y-6 text-gray-300 font-light text-lg leading-relaxed">
+                            <p>
+                                Clear inputs. Fewer moves. Better timing. <br />
+                                Instead of reacting to noise, we slow the system down enough to see signal.
+                            </p>
+                            <p>
+                                That’s when marketing becomes manageable — and decisions start to compound.
+                            </p>
                         </div>
+
+                        {/* Confident List */}
+                        <ul className="mt-8 space-y-3">
+                            {["One priority at a time", "Fewer, intentional changes", "Decisions made with context"].map((item, i) => (
+                                <li key={i} className="flex items-center gap-3 text-sm text-gray-300 font-medium">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-primary/60"></div>
+                                    <span>{item}</span>
+                                </li>
+                            ))}
+                        </ul>
                     </motion.div>
                 </div>
             </div>
