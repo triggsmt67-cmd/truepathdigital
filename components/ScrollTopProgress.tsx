@@ -55,7 +55,7 @@ const ScrollTopProgress: React.FC<ScrollTopProgressProps> = ({ onBackToTop }) =>
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.5, y: 20 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed bottom-8 right-8 z-[60]"
+            className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[60]"
           >
             <button
               onClick={handleClick}

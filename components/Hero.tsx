@@ -72,8 +72,8 @@ const Hero: React.FC = () => {
             </motion.div>
 
             {/* Heading */}
-            <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5.5rem] font-semibold text-white tracking-tighter leading-[1] md:leading-[0.9] mb-6 md:mb-8">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#FF6B00] to-white inline-block">Clear marketing decisions</span> for Montana business owners
+            <motion.h1 variants={itemVariants} className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5.5rem] font-semibold text-white tracking-tighter leading-[1] md:leading-[0.9] mb-6 md:mb-8">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-primary to-white inline">Clear marketing decisions</span> <br className="sm:hidden" /> for Montana business owners
             </motion.h1>
 
             {/* Subhead */}

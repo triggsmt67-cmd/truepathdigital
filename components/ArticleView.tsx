@@ -69,7 +69,7 @@ const AIScanZone: React.FC<{ data?: Article['aiData'], isDarkMode: boolean }> = 
       }`}>
       <div className={`px-6 py-3 border-b flex items-center gap-2 ${isDarkMode ? 'bg-primary/10 border-primary/10' : 'bg-orange-100/50 border-orange-100'}`}>
         <Zap className="w-4 h-4 text-primary" />
-        <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-primary">Protocol Summary (AI Generated)</span>
+        <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-primary">Protocol Summary</span>
       </div>
 
       <div className="p-8 space-y-8">
@@ -321,34 +321,77 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, isDarkMode, 
         </AnimatePresence>
       </button>
 
-      <section className="relative min-h-[50vh] md:min-h-[55vh] pt-32 w-full overflow-hidden flex items-end pb-8">
-        <div className="absolute inset-0 z-0">
-          <img src={fullArticle.image} alt={fullArticle.title} className={`w-full h-full object-cover transition-all duration-700 ${isDarkMode ? 'grayscale opacity-60' : 'opacity-80'}`} />
-          <div className={`absolute inset-0 transition-colors duration-500 bg-gradient-to-t ${isDarkMode ? 'from-[#121417] via-[#121417]/60 to-transparent' : 'from-slate-50 via-slate-50/40 to-transparent'}`} />
-        </div>
+      <section className="relative pt-32 pb-16 md:pb-24 px-6 overflow-hidden">
+        {/* Subtle background architecture */}
+        <div className={`absolute top-0 left-0 w-full h-[600px] opacity-20 pointer-events-none ${isDarkMode ? 'bg-gradient-to-b from-primary/10 to-transparent' : 'bg-gradient-to-b from-primary/5 to-transparent'}`} />
 
-        <div className="max-w-[1400px] mx-auto px-6 w-full relative z-20">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <button onClick={onBack} className={`flex items-center gap-2 font-mono text-xs uppercase tracking-widest mb-8 group transition-colors ${isDarkMode ? 'text-primary hover:text-white' : 'text-primary hover:text-slate-900'}`}>
-              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> Return to Insights
-            </button>
-            <div className="flex flex-wrap items-center gap-4 mb-6">
-              <span className={`px-3 py-1 rounded-full border text-[10px] font-bold tracking-widest uppercase transition-colors ${isDarkMode ? 'bg-primary/20 border-primary/30 text-primary' : 'bg-primary/10 border-primary/20 text-primary'}`}>
-                {fullArticle.category}
-              </span>
-              <div className={`flex items-center gap-1.5 text-xs font-mono transition-colors ${isDarkMode ? 'text-gray-400' : 'text-slate-500'}`}><Clock className="w-3.5 h-3.5" /> {fullArticle.publishDate}</div>
-            </div>
-            <h1 className={`text-4xl md:text-5xl lg:text-7xl font-bold tracking-tighter leading-[1.1] mb-8 max-w-4xl transition-colors ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{fullArticle.title}</h1>
+        <div className="max-w-[1400px] mx-auto relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-            <div className="max-w-4xl mb-12">
-              <AIScanZone data={fullArticle.aiData} isDarkMode={isDarkMode} />
-            </div>
+            {/* Left Column: Intelligence Detail */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <button
+                onClick={onBack}
+                className={`flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] mb-10 group transition-colors ${isDarkMode ? 'text-primary hover:text-white' : 'text-primary hover:text-slate-900'}`}
+              >
+                <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
+                Return to Intelligence Vault
+              </button>
 
-            {fullArticle.excerpt && (
-              <p className={`text-lg md:text-xl font-normal leading-relaxed transition-colors max-w-3xl ${isDarkMode ? 'text-gray-300' : 'text-slate-700'}`}>
-                {fullArticle.excerpt}
-              </p>
-            )}
+              <div className="flex items-center gap-4 mb-8">
+                <span className={`px-3 py-1 rounded-full border text-[10px] font-bold tracking-widest uppercase transition-colors ${isDarkMode ? 'bg-primary/10 border-primary/20 text-primary' : 'bg-primary/5 border-primary/10 text-primary'}`}>
+                  {fullArticle.category}
+                </span>
+                <div className={`flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest transition-colors ${isDarkMode ? 'text-secondary/40' : 'text-slate-400'}`}>
+                  <Clock className="w-3 h-3" /> {fullArticle.publishDate}
+                </div>
+              </div>
+
+              <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.05] mb-10 transition-colors ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+                {fullArticle.title}
+              </h1>
+
+              {fullArticle.excerpt && (
+                <p className={`text-xl md:text-2xl font-light leading-relaxed transition-colors border-l-2 pl-8 ${isDarkMode ? 'text-secondary border-primary/30' : 'text-slate-600 border-primary/20'}`}>
+                  {fullArticle.excerpt}
+                </p>
+              )}
+            </motion.div>
+
+            {/* Right Column: Visual Frame */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, x: 30 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+              className="relative aspect-[4/3] lg:aspect-auto lg:h-[550px]"
+            >
+              <div className={`absolute inset-0 rounded-[2rem] overflow-hidden border shadow-2xl transition-colors ${isDarkMode ? 'border-white/10 shadow-primary/5' : 'border-slate-200 shadow-slate-200/50'}`}>
+                <img
+                  src={fullArticle.image}
+                  alt={fullArticle.title}
+                  className={`w-full h-full object-cover transition-all duration-700 ${isDarkMode ? 'grayscale-[0.2] contrast-[1.1]' : ''}`}
+                />
+                <div className={`absolute inset-0 bg-gradient-to-t from-background/40 to-transparent pointer-events-none`} />
+              </div>
+
+              {/* Decorative artifacts */}
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/10 blur-3xl rounded-full" />
+              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-primary/5 blur-3xl rounded-full" />
+            </motion.div>
+          </div>
+
+          {/* AI Zone Transition */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mt-16 lg:mt-20 max-w-5xl"
+          >
+            <AIScanZone data={fullArticle.aiData} isDarkMode={isDarkMode} />
           </motion.div>
         </div>
       </section>

@@ -85,7 +85,6 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
           </span>
         </button>
 
-        {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8">
           <a
             href="#hero"
@@ -118,7 +117,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
         </div>
 
         {/* CTA */}
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <a
             href={CONTACT_LINKS.calendar}
             target="_blank"

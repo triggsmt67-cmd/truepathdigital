@@ -128,7 +128,7 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({
             <div className="flex items-center justify-center gap-3 mb-8">
               <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-primary">The Intelligence Vault</span>
             </div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-white leading-[1.1] mb-8">
+            <h1 className="text-3xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-white leading-[1.1] mb-8">
               Clear thinking for when the <br className="hidden md:block" />
               right move isn’t obvious.
             </h1>
@@ -152,6 +152,31 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({
       </section>
 
       <div ref={articleSectionRef} className="scroll-mt-32">
+        {/* Mobile Category Scroller */}
+        <div className="lg:hidden px-6 mb-8 overflow-x-auto no-scrollbar flex items-center gap-3 py-2">
+          <button
+            onClick={() => setSelectedCategorySlug(null)}
+            className={`px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap border transition-all ${!selectedCategorySlug
+                ? 'bg-primary border-primary text-white shadow-lg shadow-primary/20'
+                : isDarkMode ? 'bg-white/5 border-white/10 text-secondary' : 'bg-white border-slate-200 text-slate-600'
+              }`}
+          >
+            All Thinking
+          </button>
+          {categories.filter(c => c.count > 0 && c.slug !== 'uncategorized').map(cat => (
+            <button
+              key={cat.id}
+              onClick={() => handleCategoryClick(cat.slug)}
+              className={`px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap border transition-all ${selectedCategorySlug === cat.slug
+                  ? 'bg-primary border-primary text-white shadow-lg shadow-primary/20'
+                  : isDarkMode ? 'bg-white/5 border-white/10 text-secondary' : 'bg-white border-slate-200 text-slate-600'
+                }`}
+            >
+              {cat.name}
+            </button>
+          ))}
+        </div>
+
         <AnimatePresence mode="wait">
           <motion.section
             key={selectedCategorySlug || 'latest'}
@@ -164,23 +189,25 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({
             <div className="max-w-[1400px] mx-auto py-12 flex flex-col lg:flex-row gap-16">
 
               <div className="flex-1">
-                <div className="flex flex-col gap-4 mb-12">
+                <div className="flex flex-col gap-6 mb-16">
                   <div className="flex items-center gap-4">
                     {activeCategory ? (
-                      <div className="p-3 rounded-xl bg-primary/10 text-primary border border-primary/20">
-                        {React.createElement(CATEGORY_ICON_MAP[activeCategory.slug] || FileText, { className: "w-6 h-6" })}
+                      <div className="p-3.5 rounded-2xl bg-primary/10 text-primary border border-primary/20 shadow-sm shadow-primary/5">
+                        {React.createElement(CATEGORY_ICON_MAP[activeCategory.slug] || FileText, { className: "w-7 h-7" })}
                       </div>
                     ) : (
-                      <div className={`p-3 rounded-xl border ${isDarkMode ? 'bg-white/5 border-white/10 text-gray-400' : 'bg-slate-100 border-slate-200 text-slate-500'}`}>
-                        <BarChart3 className="w-6 h-6" />
+                      <div className={`p-3.5 rounded-2xl border ${isDarkMode ? 'bg-white/5 border-white/10 text-secondary/40' : 'bg-slate-100 border-slate-200 text-slate-400'}`}>
+                        <Lightbulb className="w-7 h-7" />
                       </div>
                     )}
-                    <h2 className={`text-3xl md:text-5xl font-bold tracking-tight transition-colors ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
-                      {activeCategory ? activeCategory.name : 'Recent Thinking'}
-                    </h2>
+                    <div className="space-y-1">
+                      <h2 className={`text-4xl md:text-5xl font-bold tracking-tight transition-colors ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+                        {activeCategory ? activeCategory.name : 'Latest Thinking'}
+                      </h2>
+                    </div>
                   </div>
-                  <p className="text-lg max-w-2xl leading-relaxed text-secondary">
-                    {activeCategory?.description || "Observations, notes, and frameworks from the field."}
+                  <p className="text-xl max-w-3xl leading-relaxed text-secondary font-light">
+                    {activeCategory?.description || "Strategic observations, technical notes, and conversion frameworks from the field."}
                   </p>
                 </div>
 
@@ -204,30 +231,37 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({
                     <p className="text-secondary/60 text-sm max-w-xs">No articles matched your search. Try a different query.</p>
                   </div>
                 ) : (
-                  <div className="grid gap-6">
+                  <div className="grid gap-8">
                     {filteredPosts.map((article, idx) => (
                       <motion.div
                         key={article.slug}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: idx * 0.05 }}
                         onClick={() => onNavigate('article', article)}
-                        className={`group border rounded-2xl p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 transition-all cursor-pointer ${isDarkMode
-                          ? 'bg-[#121417] border-white/10 hover:border-primary/40 hover:bg-white/[0.02]'
-                          : 'bg-white border-slate-200 hover:border-primary hover:shadow-lg shadow-sm'}`}
+                        className={`group relative border rounded-3xl p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-10 transition-all cursor-pointer ${isDarkMode
+                          ? 'bg-[#121417] border-white/5 hover:border-primary/40 hover:bg-white/[0.03]'
+                          : 'bg-white border-slate-200 hover:border-primary hover:shadow-2xl shadow-sm'}`}
                       >
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-3">
-                            <span className="text-[9px] font-bold text-primary bg-primary/10 px-2.5 py-1 rounded border border-primary/20 tracking-widest uppercase">Premium Access</span>
-                            <div className={`flex items-center gap-1.5 text-[11px] font-mono transition-colors ${isDarkMode ? 'text-gray-500' : 'text-slate-400'}`}><Clock className="w-3.5 h-3.5" />{article.publishDate}</div>
+                        <div className="flex-1 space-y-4">
+                          <div className="flex items-center gap-4">
+                            <span className={`text-[10px] font-bold tracking-[0.2em] uppercase px-3 py-1 rounded border ${isDarkMode ? 'bg-primary/5 border-primary/20 text-primary' : 'bg-primary/5 border-primary/10 text-primary'
+                              }`}>
+                              {article.category}
+                            </span>
+                            <div className={`flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-widest transition-colors ${isDarkMode ? 'text-secondary/30' : 'text-slate-400'}`}>
+                              <Clock className="w-3.5 h-3.5" />{article.publishDate}
+                            </div>
                           </div>
-                          <h3 className={`text-xl md:text-2xl font-bold mb-2 transition-colors group-hover:text-primary ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{article.title}</h3>
-                          <p className={`text-sm md:text-base leading-relaxed line-clamp-2 transition-colors ${isDarkMode ? 'text-gray-400' : 'text-slate-500'}`}>{article.excerpt}</p>
+                          <h3 className={`text-2xl md:text-3xl font-bold tracking-tight transition-colors group-hover:text-primary ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>{article.title}</h3>
+                          <p className={`text-base md:text-lg leading-relaxed font-light line-clamp-2 transition-colors ${isDarkMode ? 'text-secondary/60' : 'text-slate-500'}`}>{article.excerpt}</p>
                         </div>
-                        <div className="flex items-center gap-4">
-                          <button className="flex items-center gap-2 text-sm font-bold text-white group-hover:text-primary transition-colors">
-                            Read Article <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                          </button>
+
+                        <div className={`flex items-center justify-center w-12 h-12 rounded-full border transition-all ${isDarkMode
+                            ? 'bg-white/5 border-white/10 text-secondary/40 group-hover:bg-primary group-hover:border-primary group-hover:text-white'
+                            : 'bg-slate-50 border-slate-200 text-slate-400 group-hover:bg-primary group-hover:border-primary group-hover:text-white'
+                          }`}>
+                          <ChevronRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
                         </div>
                       </motion.div>
                     ))}

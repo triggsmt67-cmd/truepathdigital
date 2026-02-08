@@ -8,7 +8,7 @@ const FeatureSplit: React.FC = () => {
 
         {/* Section Intro - Small & Subtle */}
         <div className="mb-12 md:mb-16 text-center md:text-left">
-          <span className="text-gray-500 text-sm md:text-base font-light tracking-wide">
+          <span className="text-secondary/40 text-sm md:text-base font-light tracking-wide">
             Why marketing feels harder than it should
           </span>
         </div>
@@ -22,7 +22,7 @@ const FeatureSplit: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="flex flex-col opacity-80"
           >
-            <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-6">
+            <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-secondary/40 mb-6">
               The Reactive Loop
             </span>
 
@@ -30,9 +30,9 @@ const FeatureSplit: React.FC = () => {
               When everything feels urgent, <br />nothing feels clear.
             </h3>
 
-            <div className="text-gray-400 font-light text-lg leading-relaxed space-y-6 mb-8">
+            <div className="text-secondary/60 font-light text-lg leading-relaxed space-y-6 mb-8">
               <p>
-                Spreadsheets. Gut calls. Constant tweaks. <br />
+                Spreadsheets. Gut calls. Constant tweaks. <br className="hidden md:block" />
                 Most marketing doesn’t fail — it just never settles.
               </p>
               <p>
@@ -48,8 +48,8 @@ const FeatureSplit: React.FC = () => {
                 "Conflicting reports",
                 "Decisions made under pressure"
               ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 text-sm text-gray-500">
-                  <div className="w-1 h-1 rounded-full bg-gray-600"></div>
+                <li key={i} className="flex items-center gap-3 text-sm text-secondary/40">
+                  <div className="w-1 h-1 rounded-full bg-secondary/20"></div>
                   <span>{item}</span>
                 </li>
               ))}
@@ -75,9 +75,9 @@ const FeatureSplit: React.FC = () => {
               From reaction to <br />reasoned decisions.
             </h3>
 
-            <div className="text-gray-300 font-light text-lg leading-relaxed space-y-6 mb-8 relative z-10">
+            <div className="text-secondary font-light text-lg leading-relaxed space-y-6 mb-8 relative z-10">
               <p>
-                Clarity doesn’t come from doing more. <br />
+                Clarity doesn’t come from doing more. <br className="hidden md:block" />
                 It comes from slowing the system down enough to see signal.
               </p>
               <p>
@@ -92,7 +92,7 @@ const FeatureSplit: React.FC = () => {
                 "Signals you can explain",
                 "Decisions made with context"
               ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 text-sm text-gray-300 font-medium">
+                <li key={i} className="flex items-center gap-3 text-sm text-secondary font-medium">
                   <div className="w-1.5 h-1.5 rounded-full bg-primary/60"></div>
                   <span>{item}</span>
                 </li>
