@@ -59,6 +59,10 @@ const AppContent = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  useEffect(() => {
+    console.log("App Version: 0.0.1 - FIXED-ROUTING-BLOG");
+  }, []);
+
   // Derived state for Navbar
   const getCurrentView = (): ViewState => {
     if (location.pathname.startsWith('/blog') && location.pathname.length > 5) return 'article';
