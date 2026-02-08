@@ -1,6 +1,10 @@
 {
     "rewrites": [
         {
+            "source": "/api/graphql",
+            "destination": "https://admin.truepath406.com/graphql"
+        },
+        {
             "source": "/(.*)",
             "destination": "/index.html"
         }
