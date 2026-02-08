@@ -15,26 +15,23 @@ const LandingPage: React.FC = () => {
     return (
         <>
             <Hero />
-            <SectionSeparator number="01" title="REALITY CHECK" />
-            <ComparisonSection />
-
-            <SectionSeparator number="02" title="GROWTH ENGINE" />
+            <SectionSeparator number="01" title="GROWTH ENGINE" />
             <FeatureSplit />
             <QuoteSection />
 
-            <SectionSeparator number="03" title="THE MISSION" />
+            <SectionSeparator number="02" title="THE MISSION" />
             <MissionSection />
 
-            <SectionSeparator number="04" title="INFRASTRUCTURE" />
+            <SectionSeparator number="03" title="INFRASTRUCTURE" />
             <Solutions />
 
-            <SectionSeparator number="05" title="THE PROTOCOL" />
+            <SectionSeparator number="04" title="THE PROTOCOL" />
             <TrailGrid />
 
-            <SectionSeparator number="06" title="THE CHOICE" />
+            <SectionSeparator number="05" title="THE CHOICE" />
             <StakesSection />
 
-            <SectionSeparator number="07" title="THE ARCHITECT" />
+            <SectionSeparator number="06" title="THE ARCHITECT" />
             <AboutSection />
         </>
     );
