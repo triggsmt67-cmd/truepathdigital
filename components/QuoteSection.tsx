@@ -13,7 +13,7 @@ const QuoteSection: React.FC = () => {
           className="font-serif text-4xl md:text-6xl lg:text-7xl font-normal tracking-tight text-white leading-[1.15] mb-8"
         >
           The hardest part of marketing isn’t doing more.<br className="hidden md:block" />
-          It’s deciding what not to do.
+          It’s deciding what <span className="text-primary">not</span> to do.
         </motion.h2>
 
         <motion.p
