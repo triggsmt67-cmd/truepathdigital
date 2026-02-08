@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Activity, Users, MapPin, BrainCircuit, CheckCircle2, ArrowDown } from 'lucide-react';
+import { Activity, Users, MapPin, BrainCircuit, CheckCircle2, ArrowDown, ArrowRight } from 'lucide-react';
+import { CONTACT_LINKS } from '../constants/links';
 
 const stackItems = [
     {
