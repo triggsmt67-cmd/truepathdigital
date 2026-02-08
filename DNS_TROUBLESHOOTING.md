@@ -30,7 +30,19 @@ Since you are using Hostinger, follow these steps to point your domain to Vercel
 
 *Note: DNS propagation can take up to 24-48 hours, but often happens within minutes on Hostinger.*
 
-### Verification
-Open the developer console (F12) while viewing the site. You should see:
-`App Version: 0.0.1 - FIXED-ROUTING-BLOG`
-If this message appears, you are viewing the correct application.
+### How to Fix `admin.truepath406.com` (CRITICAL: Backend Error)
+You are receiving a `404: NOT_FOUND / DEPLOYMENT_NOT_FOUND` error because your backend domain (`admin.truepath406.com`) is pointing to **Vercel** instead of your **WordPress Host (Hostinger)**. Vercel cannot run PHP/WordPress directly.
+
+**Steps to Fix:**
+1.  **Find your Hostinger IP Address:**
+    *   Log in to Hostinger hPanel.
+    *   Go to **Hosting** -> **Manage**.
+    *   Look for **Website Details** on the left.
+    *   Copy the **Website IP Address** (e.g., `123.456.78.90`).
+2.  **Update DNS for `admin`:**
+    *   Go to **Domains** -> **DNS / Nameservers**.
+    *   Find the **A Record** for `admin`.
+    *   **Edit** it to point to your **Hostinger IP Address** (NOT Vercel's 76.76.21.21).
+    *   If you don't have an `admin` record, verify where your WordPress site is actually installed. If it's on a subdomain, create an A record for `admin` pointing to the Hostinger IP.
+
+*Once this is fixed, your blog posts and images will reappear automatically.*
