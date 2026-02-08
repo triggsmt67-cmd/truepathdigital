@@ -20,7 +20,7 @@ const StakesSection: React.FC = () => {
           >
             <h2 className="text-4xl md:text-6xl font-semibold text-white mb-8 tracking-tight leading-[1]">
               This work is for <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-300">business owners who:</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-orange-300">business owners who are done guessing.</span>
             </h2>
             <div className="hidden lg:block relative h-64">
               <div className="absolute inset-0 bg-primary/5 blur-[80px] rounded-full" />
@@ -39,15 +39,15 @@ const StakesSection: React.FC = () => {
             {/* List */}
             <ul className="space-y-8">
               {[
-                "feel unsure what marketing advice to trust anymore",
+                "don’t know which marketing advice to trust anymore",
                 "want clarity before committing more money",
-                "value understanding over hype"
+                "care more about understanding than hype"
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-6 group">
                   <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 text-primary group-hover:bg-primary group-hover:text-white transition-all">
                     <CheckCircle2 className="w-6 h-6" />
                   </div>
-                  <span className="text-xl md:text-2xl text-gray-300 font-normal leading-relaxed">{item}</span>
+                  <span className="text-xl md:text-2xl text-gray-300 font-normal leading-relaxed lowercase">{item}</span>
                 </li>
               ))}
             </ul>
@@ -59,10 +59,10 @@ const StakesSection: React.FC = () => {
               </div>
               <div className="space-y-6 relative z-10">
                 <p className="text-lg md:text-xl text-gray-300 font-normal leading-relaxed">
-                  If you’re looking for someone to “just run ads,” I’m probably not the right fit.
+                  If you’re looking for someone to “just run ads,” this won’t be a good fit.
                 </p>
                 <p className="text-xl md:text-2xl text-white font-medium leading-relaxed">
-                  If you want to understand why things work—and what to do next—we’ll get along fine.
+                  If you want to understand why things work — and make the next decision with confidence — we’ll work well together.
                 </p>
               </div>
             </div>
