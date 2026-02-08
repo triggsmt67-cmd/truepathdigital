@@ -27,7 +27,9 @@ interface ResourcesPageProps {
   onToggleTheme: () => void;
   categories: Category[];
   posts: Article[];
+  posts: Article[];
   isLoading: boolean;
+  error?: string | null;
 }
 
 const CATEGORY_ICON_MAP: Record<string, any> = {
@@ -46,7 +48,8 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({
   onToggleTheme,
   categories,
   posts,
-  isLoading
+  isLoading,
+  error
 }) => {
   const [selectedCategorySlug, setSelectedCategorySlug] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -188,6 +191,14 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({
                     <Loader2 className="w-8 h-8 text-primary animate-spin" />
                     <span className={`text-[10px] font-mono uppercase tracking-widest ${isDarkMode ? 'text-gray-600' : 'text-slate-400'}`}>Querying Node...</span>
                   </div>
+                ) : error ? (
+                  <div className={`py-20 flex flex-col items-center justify-center gap-4 border rounded-3xl text-center px-6 ${isDarkMode ? 'border-red-500/20 bg-red-500/5' : 'border-red-200 bg-red-50'}`}>
+                    <AlertCircle className="w-10 h-10 text-red-500" />
+                    <h3 className="text-xl font-bold text-red-500 tracking-tight">Sync Error</h3>
+                    <p className={`text-sm max-w-md ${isDarkMode ? 'text-gray-400' : 'text-slate-600'}`}>
+                      {error || "Failed to establish secure connection to the Intelligence Vault."}
+                    </p>
+                  </div>
                 ) : filteredPosts.length === 0 ? (
                   <div className={`py-20 flex flex-col items-center justify-center gap-4 border rounded-3xl text-center px-6 ${isDarkMode ? 'border-white/5 bg-white/[0.02]' : 'border-slate-200 bg-white shadow-sm'}`}>
                     <AlertCircle className="w-10 h-10 text-gray-700" />
@@ -241,7 +252,7 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({
         </AnimatePresence>
       </div>
       <div className="h-20" />
-    </div>
+    </div >
   );
 };
 

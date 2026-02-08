@@ -74,7 +74,7 @@ const AppContent = () => {
   // Prefetch Intelligence Vault Data
   // We pass these to ResourcesPage. ArticlePage uses the hook internally to find the article.
   // Ideally we'd use a Context, but passing props is fine for now.
-  const { categories, posts, loading: vaultLoading } = useIntelligenceVault();
+  const { categories, posts, loading: vaultLoading, error: vaultError } = useIntelligenceVault();
 
   // Transition Guard
   useEffect(() => {
@@ -153,6 +153,7 @@ const AppContent = () => {
                     categories={categories}
                     posts={posts}
                     isLoading={vaultLoading}
+                    error={vaultError}
                   />
                 } />
                 <Route path="/blog/:slug" element={
