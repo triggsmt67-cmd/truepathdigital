@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const FeatureSplit: React.FC = () => {
   return (
-    <section className="py-20 md:py-24 bg-[#0F0F0F] relative overflow-hidden border-b border-white/5">
+    <section className="py-20 md:py-24 bg-background relative overflow-hidden border-b border-white/5">
       <div className="max-w-6xl mx-auto px-6 relative z-10">
 
         {/* Section Intro - Small & Subtle */}

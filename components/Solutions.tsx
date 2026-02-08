@@ -29,7 +29,7 @@ const solutions = [
 
 const Solutions: React.FC = () => {
     return (
-        <section id="solutions" className="py-10 md:py-16 bg-[#121212] relative overflow-hidden border-b border-white/5 scroll-mt-20">
+        <section id="solutions" className="py-10 md:py-16 bg-background relative overflow-hidden border-b border-white/5 scroll-mt-20">
             {/* Abstract Background Grid/Pattern */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
                 <svg width="100%" height="100%">
@@ -60,7 +60,7 @@ const Solutions: React.FC = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl font-normal"
+                        className="text-lg md:text-xl text-secondary leading-relaxed max-w-2xl font-normal"
                     >
                         Clear decisions across your primary growth levers.
                     </motion.p>
@@ -75,14 +75,14 @@ const Solutions: React.FC = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="group relative flex flex-col h-full bg-[#18181b] border border-white/5 rounded-2xl p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 overflow-hidden"
+                            className="group relative flex flex-col h-full bg-white/[0.02] border border-white/5 rounded-2xl p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 overflow-hidden"
                         >
                             {/* Vertical Accent Line (Hover Only) */}
                             <div className="absolute left-0 top-1/2 -translate-y-1/2 h-2/3 w-[2px] bg-primary opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-linear" />
 
                             {/* Icon Header */}
                             <div className="flex items-center justify-between mb-8 opacity-80 group-hover:opacity-100 transition-opacity">
-                                <div className="text-gray-400 group-hover:text-primary transition-colors duration-300">
+                                <div className="text-secondary group-hover:text-primary transition-colors duration-300">
                                     <solution.icon className="w-6 h-6" strokeWidth={1.5} />
                                 </div>
                                 <span className="text-[10px] font-medium text-gray-500 uppercase tracking-widest bg-white/[0.03] px-2 py-1 rounded">
@@ -95,7 +95,7 @@ const Solutions: React.FC = () => {
                                 <h3 className="text-xl md:text-2xl font-semibold text-white mb-4 group-hover:text-white transition-colors tracking-tight">
                                     {solution.title}
                                 </h3>
-                                <p className="text-gray-400 text-sm md:text-base leading-relaxed font-light">
+                                <p className="text-secondary text-sm md:text-base leading-relaxed font-light">
                                     {solution.description}
                                 </p>
                             </div>

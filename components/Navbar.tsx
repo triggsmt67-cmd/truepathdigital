@@ -64,7 +64,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
       animate={{
         y: isScrolled ? 12 : 0,
         scale: isScrolled ? 0.98 : 1,
-        backgroundColor: isScrolled ? 'rgba(18, 18, 18, 0.75)' : 'rgba(18, 18, 18, 0)',
+        backgroundColor: isScrolled ? 'rgba(18, 20, 23, 0.75)' : 'rgba(18, 20, 23, 0)',
         backdropFilter: isScrolled ? 'blur(20px)' : 'blur(0px)',
         borderColor: isScrolled ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0)',
         borderRadius: isScrolled ? '24px' : '0px',
@@ -115,7 +115,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
 
           <button
             onClick={() => onNavigate('resources')}
-            className={`text-sm font-medium transition-colors ${(currentView === 'resources' || currentView === 'article') ? 'text-primary' : 'text-gray-400 hover:text-white'}`}
+            className={`text-sm font-medium transition-colors ${(currentView === 'resources' || currentView === 'article') ? 'text-primary' : 'text-secondary hover:text-white'}`}
           >
             Insights
           </button>
@@ -149,7 +149,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden absolute top-full left-0 right-0 bg-[#121212] border-b border-white/10 overflow-hidden"
+            className="md:hidden absolute top-full left-0 right-0 bg-background border-b border-white/10 overflow-hidden"
           >
             <div className="px-6 py-8 flex flex-col gap-6">
               <a

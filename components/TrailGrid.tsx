@@ -5,7 +5,7 @@ import { Compass, Target, Goal, CheckCircle } from 'lucide-react';
 
 const TrailGrid: React.FC = () => {
     return (
-        <section id="how-i-work" className="py-12 md:py-16 relative bg-[#121417] overflow-hidden">
+        <section id="how-i-work" className="py-12 md:py-16 relative bg-background overflow-hidden">
             <div className="max-w-[1400px] mx-auto px-6 relative z-10">
 
                 <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -36,10 +36,10 @@ const TrailGrid: React.FC = () => {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="space-y-8"
                     >
-                        <div className="text-lg md:text-xl text-gray-300 font-light leading-relaxed space-y-8">
+                        <div className="text-lg md:text-xl text-secondary font-light leading-relaxed space-y-8">
                             <p>
                                 I start by understanding your buyer, your goals, and what already exists.<br />
-                                <span className="text-gray-500">Not what should exist. Not what someone sold you. What’s actually there.</span>
+                                <span className="text-secondary/60">Not what should exist. Not what someone sold you. What’s actually there.</span>
                             </p>
 
                             <div>
@@ -60,7 +60,7 @@ const TrailGrid: React.FC = () => {
                                 <p className="text-white font-medium text-xl">
                                     The goal is always the same:
                                 </p>
-                                <p className="text-gray-400">
+                                <p className="text-secondary">
                                     fewer unknowns, less stress, and marketing you can actually trust.
                                 </p>
                             </div>

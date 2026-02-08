@@ -59,7 +59,7 @@ const ScrollTopProgress: React.FC<ScrollTopProgressProps> = ({ onBackToTop }) =>
           >
             <button
               onClick={handleClick}
-              className="relative group w-14 h-14 rounded-full bg-[#121212]/80 backdrop-blur-xl border border-white/10 flex items-center justify-center transition-all hover:border-primary/50 hover:shadow-[0_0_30px_rgba(255,107,0,0.3)] focus:outline-none"
+              className="relative group w-14 h-14 rounded-full bg-background/80 backdrop-blur-xl border border-white/10 flex items-center justify-center transition-all hover:border-primary/50 hover:shadow-[0_0_30px_rgba(255,107,0,0.3)] focus:outline-none"
               aria-label="Back to top"
             >
               {/* Progress Ring */}
@@ -90,7 +90,7 @@ const ScrollTopProgress: React.FC<ScrollTopProgressProps> = ({ onBackToTop }) =>
 
               {/* Icon */}
               <ChevronUp className="w-6 h-6 text-white group-hover:text-primary transition-colors group-hover:-translate-y-1 duration-300" />
-              
+
               {/* Outer Glow Ring */}
               <div className="absolute inset-[-4px] rounded-full border border-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 scale-110" />
             </button>

@@ -10,7 +10,7 @@ const MissionSection: React.FC = () => {
                     {/* Subtle Label - Secondary */}
                     <div className="flex items-center gap-3 mb-12 opacity-50">
                         <div className="h-px w-8 bg-primary"></div>
-                        <span className="text-xs font-medium text-gray-400 uppercase tracking-widest">Introduction</span>
+                        <span className="text-xs font-medium text-secondary uppercase tracking-widest">Introduction</span>
                     </div>
 
                     <motion.div
@@ -26,7 +26,7 @@ const MissionSection: React.FC = () => {
 
                         <div className="grid md:grid-cols-12 gap-12">
                             {/* Empty column for offset layout if desired, or just full width text */}
-                            <div className="md:col-span-12 lg:col-span-10 space-y-8 text-lg md:text-2xl text-gray-400 font-light leading-relaxed">
+                            <div className="md:col-span-12 lg:col-span-10 space-y-8 text-lg md:text-2xl text-secondary font-light leading-relaxed">
                                 <p>
                                     They start with unclear buyers, noisy advice, and too many tools doing too little.
                                 </p>

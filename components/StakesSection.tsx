@@ -5,7 +5,7 @@ import { CheckCircle2, UserCheck, AlertCircle, Sparkles } from 'lucide-react';
 
 const StakesSection: React.FC = () => {
   return (
-    <section id="who-this-is-for" className="py-12 md:py-16 bg-[#121212] relative overflow-hidden">
+    <section id="who-this-is-for" className="py-12 md:py-16 bg-background relative overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6 relative z-10">
 
         <div className="grid lg:grid-cols-12 gap-16 items-start">
@@ -47,7 +47,7 @@ const StakesSection: React.FC = () => {
                   <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 text-primary group-hover:bg-primary group-hover:text-white transition-all">
                     <CheckCircle2 className="w-6 h-6" />
                   </div>
-                  <span className="text-xl md:text-2xl text-gray-300 font-normal leading-relaxed lowercase">{item}</span>
+                  <span className="text-xl md:text-2xl text-secondary font-normal leading-relaxed lowercase">{item}</span>
                 </li>
               ))}
             </ul>
@@ -58,7 +58,7 @@ const StakesSection: React.FC = () => {
                 <Sparkles className="w-16 h-16 text-primary" />
               </div>
               <div className="space-y-6 relative z-10">
-                <p className="text-lg md:text-xl text-gray-300 font-normal leading-relaxed">
+                <p className="text-lg md:text-xl text-secondary font-normal leading-relaxed">
                   If you’re looking for someone to “just run ads,” this won’t be a good fit.
                 </p>
                 <p className="text-xl md:text-2xl text-white font-medium leading-relaxed">

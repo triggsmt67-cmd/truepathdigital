@@ -5,7 +5,7 @@ import { AlertCircle, Zap } from 'lucide-react';
 
 const ComparisonSection: React.FC = () => {
     return (
-        <section id="comparison" className="py-20 md:py-24 relative border-b border-white/5 bg-[#121417] overflow-hidden">
+        <section id="comparison" className="py-20 md:py-24 relative border-b border-white/5 bg-background overflow-hidden">
             {/* Subtle Texture */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:32px_32px]"></div>
 

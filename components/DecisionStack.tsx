@@ -41,10 +41,10 @@ const stackItems = [
 const DecisionStack: React.FC = () => {
     return (
         <div className="w-full max-w-md mx-auto">
-            <div className="rounded-[32px] bg-[#121417]/80 backdrop-blur-xl border border-white/10 overflow-hidden shadow-2xl">
+            <div className="rounded-[32px] bg-background/80 backdrop-blur-xl border border-white/10 overflow-hidden shadow-2xl">
                 {/* Header */}
                 <div className="px-6 py-5 border-b border-white/5 bg-white/[0.02]">
-                    <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest text-center">
+                    <h3 className="text-sm font-bold text-secondary uppercase tracking-widest text-center">
                         Intelligent Decision Stack
                     </h3>
                 </div>
@@ -60,7 +60,7 @@ const DecisionStack: React.FC = () => {
                             initial={{ opacity: 0, y: 15 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 + (index * 0.15), duration: 0.5, ease: "easeOut" }}
-                            className={`relative z-10 flex items-center gap-4 p-4 rounded-2xl border bg-[#181a1d] ${item.border} border-opacity-30`}
+                            className={`relative z-10 flex items-center gap-4 p-4 rounded-2xl border bg-background ${item.border} border-opacity-30`}
                         >
                             <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${item.bg} ${item.color} opacity-90`}>
                                 <item.icon className="w-4 h-4" />
@@ -69,7 +69,7 @@ const DecisionStack: React.FC = () => {
                                 <div className={`font-semibold text-sm mb-0.5 text-gray-200`}>
                                     {item.title}
                                 </div>
-                                <div className="text-xs text-gray-500 font-medium leading-snug">
+                                <div className="text-xs text-secondary/60 font-medium leading-snug">
                                     {item.subtitle}
                                 </div>
                             </div>
@@ -99,7 +99,7 @@ const DecisionStack: React.FC = () => {
                         className="relative z-10 block cursor-pointer group/btn no-underline"
                     >
                         <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/30 to-orange-600/30 rounded-2xl blur opacity-0 group-hover/btn:opacity-50 transition-opacity duration-500"></div>
-                        <div className="relative flex items-center justify-between p-5 rounded-2xl border border-primary/40 bg-[#1A1D21] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.3)] group-hover/btn:border-primary/60 group-hover/btn:shadow-[0_15px_35px_-10px_rgba(255,107,0,0.15)] transition-all duration-300">
+                        <div className="relative flex items-center justify-between p-5 rounded-2xl border border-primary/40 bg-background shadow-[0_10px_30px_-10px_rgba(0,0,0,0.3)] group-hover/btn:border-primary/60 group-hover/btn:shadow-[0_15px_35px_-10px_rgba(255,107,0,0.15)] transition-all duration-300">
                             <div className="flex items-center gap-4">
                                 <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center shrink-0 shadow-lg shadow-primary/20 opacity-90 group-hover/btn:opacity-100 transition-opacity">
                                     <CheckCircle2 className="w-5 h-5 text-white" />
