@@ -47,30 +47,35 @@ const AboutSection: React.FC = () => {
               Decisions Over Hype.
             </h2>
 
-            <div className="space-y-6 text-lg md:text-xl text-gray-300 leading-relaxed mb-10 font-normal">
+            <div className="space-y-6 text-lg md:text-xl text-gray-300 leading-relaxed mb-10 font-light">
               <p>
-                I’ve worked with <span className="text-white font-medium">Montana-based businesses</span> and currently support active clients
-                across paid growth, systems clarity, and decision-making during change.
+                I work with <span className="text-white font-medium">Montana-based businesses</span> that need clarity during change.
+                That usually means paid growth decisions, system cleanup, and figuring out what actually deserves attention when everything feels noisy.
               </p>
-              <div className="grid sm:grid-cols-2 gap-6 pt-2">
-                <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10 flex items-start gap-4">
-                  <ShieldCheck className="w-6 h-6 text-primary shrink-0" />
-                  <div>
-                    <div className="text-white font-medium mb-1">Where AI helps</div>
-                    <div className="text-sm text-gray-400">Automation that reduces effort, not creates confusion.</div>
+              <p>
+                I’m not interested in chasing trends or shipping tactics for the sake of activity. My work is about helping owners slow things down, see the signal, and make decisions they can stand behind.
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-6 pt-6">
+                <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10 flex flex-col justify-center gap-3">
+                  <div className="flex items-center gap-3 text-primary mb-1">
+                    <ShieldCheck className="w-5 h-5" />
+                    <span className="text-white font-medium">Where AI helps</span>
+                  </div>
+                  <div className="text-sm text-gray-400 leading-relaxed">
+                    Automation that reduces effort and noise — not replaces judgment or adds complexity.
                   </div>
                 </div>
-                <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10 flex items-start gap-4">
-                  <FileText className="w-6 h-6 text-primary shrink-0" />
-                  <div>
-                    <div className="text-white font-medium mb-1">What’s been proven</div>
-                    <div className="text-sm text-gray-400">References and examples available by request.</div>
+                <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/10 flex flex-col justify-center gap-3">
+                  <div className="flex items-center gap-3 text-primary mb-1">
+                    <FileText className="w-5 h-5" />
+                    <span className="text-white font-medium">What’s been proven</span>
+                  </div>
+                  <div className="text-sm text-gray-400 leading-relaxed">
+                    Examples, references, and past work available by request.
                   </div>
                 </div>
               </div>
-              <p>
-                If your marketing feels harder to trust than it used to, I’m open to a short conversation.
-              </p>
             </div>
 
             {/* Final CTA Button */}
