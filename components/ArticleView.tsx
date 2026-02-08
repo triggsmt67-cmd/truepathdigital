@@ -289,7 +289,7 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, isDarkMode, 
     return (
       <div className="min-h-screen bg-[#121417] flex flex-col items-center justify-center gap-6">
         <Loader2 className="w-12 h-12 text-primary animate-spin" />
-        <p className="text-gray-500 font-mono text-sm tracking-widest uppercase animate-pulse">Decrypting Protocol Alpha...</p>
+        <p className="text-secondary/40 font-mono text-[10px] tracking-widest uppercase animate-pulse">Loading Thinking...</p>
       </div>
     );
   }
@@ -298,8 +298,8 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, isDarkMode, 
     return (
       <div className="min-h-screen bg-[#121417] flex flex-col items-center justify-center gap-6 px-6 text-center">
         <AlertTriangle className="w-16 h-16 text-red-500/50" />
-        <h2 className="text-3xl font-bold text-white tracking-tight">Access Denied</h2>
-        <p className="text-gray-500 max-w-md leading-relaxed">{error || "System could not initialize requested protocol."}</p>
+        <h2 className="text-3xl font-bold text-white tracking-tight">Article Not Found</h2>
+        <p className="text-secondary max-w-md leading-relaxed">{error || "The requested piece could not be found."}</p>
         <button onClick={onBack} className="mt-8 px-8 py-3 rounded-full border border-white/10 text-white hover:bg-white/5 transition-colors">Return to Vault</button>
       </div>
     );

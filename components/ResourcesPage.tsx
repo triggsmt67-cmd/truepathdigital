@@ -27,7 +27,6 @@ interface ResourcesPageProps {
   onToggleTheme: () => void;
   categories: Category[];
   posts: Article[];
-  posts: Article[];
   isLoading: boolean;
   error?: string | null;
 }
@@ -103,7 +102,7 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({
     return (
       <div className={`min-h-screen flex flex-col items-center justify-center gap-6 transition-colors duration-500 ${isDarkMode ? 'bg-[#121417]' : 'bg-slate-50'}`}>
         <Loader2 className="w-12 h-12 text-primary animate-spin" />
-        <p className={`font-mono text-sm tracking-widest uppercase animate-pulse ${isDarkMode ? 'text-gray-500' : 'text-slate-400'}`}>Scanning Protocols...</p>
+        <p className="font-mono text-[10px] tracking-[0.2em] uppercase animate-pulse text-secondary">Loading Intelligence...</p>
       </div>
     );
   }
@@ -122,31 +121,30 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({
         </AnimatePresence>
       </button>
 
-      <section className="relative px-6 overflow-hidden">
-        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] blur-[150px] rounded-full pointer-events-none transition-colors duration-500 ${isDarkMode ? 'bg-primary/10' : 'bg-primary/5'}`} />
+      <section className="relative px-6 overflow-hidden pt-12">
+        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] blur-[150px] rounded-full pointer-events-none bg-primary/5`} />
         <div className="max-w-[1400px] mx-auto text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <div className="flex items-center justify-center gap-3 mb-8">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-              <span className={`text-[10px] font-bold tracking-[0.25em] uppercase ${isDarkMode ? 'text-primary' : 'text-primary'}`}>The Intelligence Vault</span>
+              <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-primary">The Intelligence Vault</span>
             </div>
-            <h1 className={`text-5xl md:text-7xl lg:text-[5rem] font-semibold tracking-tighter leading-[0.95] mb-8 transition-colors duration-500 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
-              Blueprints for <br />
-              <span className={`text-transparent bg-clip-text bg-gradient-to-r ${isDarkMode ? 'from-white via-gray-400 to-gray-600' : 'from-slate-900 via-slate-700 to-slate-500'}`}>Exponential Growth.</span>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-white leading-[1.1] mb-8">
+              Clear thinking for when the <br className="hidden md:block" />
+              right move isn’t obvious.
             </h1>
-            <p className={`text-lg md:text-xl max-w-2xl mx-auto font-normal leading-relaxed mb-12 transition-colors duration-500 ${isDarkMode ? 'text-gray-400' : 'text-slate-600'}`}>
-              Deep-technical guides, architectural frameworks, and market insights designed for those who value logic over luck.
+            <p className="text-lg md:text-xl text-secondary max-w-2xl mx-auto font-light leading-relaxed mb-12">
+              Notes, frameworks, and field-tested insights on making better marketing decisions — without chasing trends or tools.
             </p>
             <div className="max-w-xl mx-auto relative group">
               <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none">
-                <Search className={`w-5 h-5 group-focus-within:text-primary transition-colors ${isDarkMode ? 'text-gray-500' : 'text-slate-400'}`} />
+                <Search className="w-4 h-4 text-white/20" />
               </div>
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search the vault..."
-                className={`w-full border rounded-full py-4 pl-14 pr-6 focus:outline-none transition-all placeholder:text-gray-600 font-medium ${isDarkMode ? 'bg-white/[0.03] border-white/10 text-white focus:border-primary/50 focus:ring-1 focus:ring-primary/20' : 'bg-white border-slate-200 text-slate-900 focus:border-primary/50 focus:ring-1 focus:ring-primary/20 shadow-sm'}`}
+                placeholder="Search by question, not keyword…"
+                className="w-full border border-white/5 rounded-full py-4 pl-12 pr-6 bg-white/[0.02] text-white focus:outline-none focus:border-white/10 transition-all placeholder:text-white/20 text-sm"
               />
             </div>
           </motion.div>
@@ -177,19 +175,19 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({
                         <BarChart3 className="w-6 h-6" />
                       </div>
                     )}
-                    <h2 className={`text-4xl md:text-5xl font-bold tracking-tight transition-colors ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
-                      {activeCategory ? activeCategory.name : 'Latest Intelligence'} <span className={`${isDarkMode ? 'text-gray-600' : 'text-slate-300'} font-normal`}>Files</span>
+                    <h2 className={`text-3xl md:text-5xl font-bold tracking-tight transition-colors ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+                      {activeCategory ? activeCategory.name : 'Recent Thinking'}
                     </h2>
                   </div>
-                  <p className={`text-lg max-w-2xl leading-relaxed transition-colors ${isDarkMode ? 'text-gray-400' : 'text-slate-600'}`}>
-                    {activeCategory?.description || "Real-time deployments and technical documentation from the True Path engineering labs."}
+                  <p className="text-lg max-w-2xl leading-relaxed text-secondary">
+                    {activeCategory?.description || "Observations, notes, and frameworks from the field."}
                   </p>
                 </div>
 
                 {postsLoading ? (
                   <div className={`py-20 flex flex-col items-center justify-center gap-4 border rounded-3xl ${isDarkMode ? 'border-white/5 bg-white/[0.02]' : 'border-slate-200 bg-white shadow-sm'}`}>
                     <Loader2 className="w-8 h-8 text-primary animate-spin" />
-                    <span className={`text-[10px] font-mono uppercase tracking-widest ${isDarkMode ? 'text-gray-600' : 'text-slate-400'}`}>Querying Node...</span>
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-secondary/40">Loading...</span>
                   </div>
                 ) : error ? (
                   <div className={`py-20 flex flex-col items-center justify-center gap-4 border rounded-3xl text-center px-6 ${isDarkMode ? 'border-red-500/20 bg-red-500/5' : 'border-red-200 bg-red-50'}`}>
@@ -202,8 +200,8 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({
                 ) : filteredPosts.length === 0 ? (
                   <div className={`py-20 flex flex-col items-center justify-center gap-4 border rounded-3xl text-center px-6 ${isDarkMode ? 'border-white/5 bg-white/[0.02]' : 'border-slate-200 bg-white shadow-sm'}`}>
                     <AlertCircle className="w-10 h-10 text-gray-700" />
-                    <h3 className="text-xl font-bold text-gray-500 tracking-tight">Zero Protocols Found</h3>
-                    <p className="text-gray-600 text-sm max-w-xs">No intelligence matched your current search parameters. Clear filters to reset view.</p>
+                    <h3 className="text-xl font-bold text-secondary tracking-tight">No Matches Found</h3>
+                    <p className="text-secondary/60 text-sm max-w-xs">No articles matched your search. Try a different query.</p>
                   </div>
                 ) : (
                   <div className="grid gap-6">
@@ -227,8 +225,8 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({
                           <p className={`text-sm md:text-base leading-relaxed line-clamp-2 transition-colors ${isDarkMode ? 'text-gray-400' : 'text-slate-500'}`}>{article.excerpt}</p>
                         </div>
                         <div className="flex items-center gap-4">
-                          <button className={`flex items-center gap-2 text-sm font-bold group-hover:text-primary transition-colors ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
-                            Initialize Blueprint <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          <button className="flex items-center gap-2 text-sm font-bold text-white group-hover:text-primary transition-colors">
+                            Read Article <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                           </button>
                         </div>
                       </motion.div>
