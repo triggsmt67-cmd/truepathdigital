@@ -86,28 +86,39 @@ const DecisionStack: React.FC = () => {
                         <ArrowDown className="w-4 h-4 animate-bounce opacity-50" />
                     </motion.div>
 
-                    {/* Final Output */}
-                    <motion.div
+                    {/* Final Output - Clickable Button */}
+                    <motion.a
+                        href={CONTACT_LINKS.calendar}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         initial={{ opacity: 0, scale: 0.95, y: 10 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                         transition={{ delay: 1.0, duration: 0.6, type: "spring" }}
-                        className="relative z-10"
+                        className="relative z-10 block cursor-pointer group/btn no-underline"
                     >
-                        <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/50 to-orange-600/50 rounded-2xl blur opacity-30 animate-pulse"></div>
-                        <div className="relative flex items-center gap-4 p-5 rounded-2xl border border-primary/30 bg-[#1A1D21] shadow-[0_4px_20px_-5px_rgba(255,107,0,0.15)] group">
-                            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center shrink-0 shadow-lg shadow-primary/20">
-                                <CheckCircle2 className="w-6 h-6 text-white" />
+                        <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/50 to-orange-600/50 rounded-2xl blur opacity-30 animate-pulse group-hover/btn:opacity-60 transition-opacity duration-300"></div>
+                        <div className="relative flex items-center justify-between p-5 rounded-2xl border border-primary/30 bg-[#1A1D21] shadow-[0_4px_20px_-5px_rgba(255,107,0,0.15)] group-hover/btn:border-primary/60 transition-colors duration-300">
+                            <div className="flex items-center gap-4">
+                                <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center shrink-0 shadow-lg shadow-primary/20 group-hover/btn:scale-110 transition-transform duration-300">
+                                    <CheckCircle2 className="w-6 h-6 text-white" />
+                                </div>
+                                <div>
+                                    <div className="font-bold text-white text-base mb-0.5 group-hover/btn:text-primary transition-colors duration-300">
+                                        One Clear Next Decision
+                                    </div>
+                                    <div className="text-xs text-primary/80 font-medium uppercase tracking-wider group-hover/btn:text-white/60 transition-colors duration-300">
+                                        The Final Output
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <div className="font-bold text-white text-base mb-0.5">
-                                    One Clear Next Decision
-                                </div>
-                                <div className="text-xs text-primary/80 font-medium uppercase tracking-wider">
-                                    The Final Output
-                                </div>
+
+                            <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover/btn:bg-primary group-hover/btn:text-white transition-all duration-300">
+                                <ArrowRight className="w-4 h-4 text-gray-400 group-hover/btn:text-white transition-colors" />
                             </div>
                         </div>
-                    </motion.div>
+                    </motion.a>
                 </div>
             </div>
         </div>
