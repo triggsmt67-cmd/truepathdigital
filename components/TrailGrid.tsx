@@ -36,34 +36,34 @@ const TrailGrid: React.FC = () => {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="space-y-8"
                     >
-                        <div className="text-lg md:text-xl text-gray-300 leading-relaxed font-normal space-y-6">
+                        <div className="text-lg md:text-xl text-gray-300 font-light leading-relaxed space-y-8">
                             <p>
-                                I start by understanding your buyer, your goals, and what already exists.
+                                I start by understanding your buyer, your goals, and what already exists.<br />
+                                <span className="text-gray-500">Not what should exist. Not what someone sold you. What’s actually there.</span>
                             </p>
-                            <div className="grid sm:grid-cols-2 gap-6 py-4">
-                                <div className="flex items-start gap-3">
-                                    <Target className="w-5 h-5 text-primary shrink-0 mt-1" />
-                                    <span className="text-gray-300">Sometimes that leads to clearer decisions.</span>
-                                </div>
-                                <div className="flex items-start gap-3">
-                                    <Goal className="w-5 h-5 text-primary shrink-0 mt-1" />
-                                    <span className="text-gray-300">Sometimes it leads to building something new.</span>
-                                </div>
-                            </div>
-                            <p className="text-white font-medium border-l-2 border-primary/30 pl-6">
-                                The goal is always the same: fewer unknowns, less stress, and marketing you can actually trust.
-                            </p>
-                        </div>
 
-                        <div className="flex items-center gap-4 pt-4">
-                            <div className="flex -space-x-3">
-                                {[1, 2, 3].map((i) => (
-                                    <div key={i} className="w-10 h-10 rounded-full border-2 border-[#121417] bg-gray-800 overflow-hidden">
-                                        <img src={`https://i.pravatar.cc/150?u=${i + 10}`} alt="avatar" />
-                                    </div>
-                                ))}
+                            <div>
+                                <p className="mb-4 text-white font-medium">From there, the work takes one of two paths:</p>
+                                <ul className="space-y-3">
+                                    <li className="flex items-start gap-3">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2.5 shrink-0"></div>
+                                        <span>Clarifying the decisions that are holding everything else up</span>
+                                    </li>
+                                    <li className="flex items-start gap-3">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2.5 shrink-0"></div>
+                                        <span>Building only what’s necessary to support those decisions</span>
+                                    </li>
+                                </ul>
                             </div>
-                            <span className="text-sm text-gray-400 font-mono">Supporting Montana owners today</span>
+
+                            <div className="pt-4 border-l-2 border-primary/30 pl-6">
+                                <p className="text-white font-medium text-xl">
+                                    The goal is always the same:
+                                </p>
+                                <p className="text-gray-400">
+                                    fewer unknowns, less stress, and marketing you can actually trust.
+                                </p>
+                            </div>
                         </div>
                     </motion.div>
                 </div>
