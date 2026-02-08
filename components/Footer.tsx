@@ -60,7 +60,7 @@ const Footer: React.FC = () => {
 
           <div className="md:col-span-4 text-center md:text-right">
             <p className="text-sm text-secondary/40 mb-1">&copy; {new Date().getFullYear()} True Path Digital. All rights reserved.</p>
-            <p className="text-xs text-gray-600 font-mono text-primary/60">Based in Montana. Built for the World.</p>
+            <p className="text-xs text-secondary/40 font-mono">Based in Montana. Built for the World.</p>
           </div>
 
         </div>

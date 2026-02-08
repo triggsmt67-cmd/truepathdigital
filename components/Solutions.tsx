@@ -85,7 +85,7 @@ const Solutions: React.FC = () => {
                                 <div className="text-secondary group-hover:text-primary transition-colors duration-300">
                                     <solution.icon className="w-6 h-6" strokeWidth={1.5} />
                                 </div>
-                                <span className="text-[10px] font-medium text-gray-500 uppercase tracking-widest bg-white/[0.03] px-2 py-1 rounded">
+                                <span className="text-[10px] font-medium text-secondary uppercase tracking-widest bg-white/[0.03] px-2 py-1 rounded">
                                     {solution.role}
                                 </span>
                             </div>
@@ -103,7 +103,7 @@ const Solutions: React.FC = () => {
                             {/* Tags List */}
                             <div className="space-y-2 pt-6 border-t border-white/5">
                                 {solution.tags.map((tag, i) => (
-                                    <div key={i} className="flex items-center gap-2 text-xs text-gray-500 group-hover:text-gray-400 transition-colors">
+                                    <div key={i} className="flex items-center gap-2 text-xs text-secondary/60 group-hover:text-secondary transition-colors">
                                         <div className="w-1 h-1 rounded-full bg-gray-700 group-hover:bg-primary/50 transition-colors"></div>
                                         {tag}
                                     </div>

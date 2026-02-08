@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Compass, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ViewState } from '../types';
 import { CONTACT_LINKS } from '../constants/links';
@@ -80,12 +80,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
           onClick={() => { onNavigate('landing'); }}
           className="flex items-center gap-2 group cursor-pointer focus:outline-none"
         >
-          <div className="relative">
-            <Compass className="w-8 h-8 text-primary group-hover:rotate-45 transition-transform duration-500" />
-            <div className="absolute inset-0 bg-primary/20 blur-lg rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-          </div>
           <span className="font-semibold text-lg tracking-tight text-white">
-            True Path <span className="text-white/50 font-normal">Digital</span>
+            True Path <span className="text-secondary font-normal">Digital</span>
           </span>
         </button>
 
@@ -94,21 +90,21 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
           <a
             href="#hero"
             onClick={(e) => handleLandingLink(e, '#hero')}
-            className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
+            className="text-sm font-medium text-secondary hover:text-white transition-colors"
           >
             Home
           </a>
           <a
             href="#how-i-work"
             onClick={(e) => handleLandingLink(e, '#how-i-work')}
-            className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
+            className="text-sm font-medium text-secondary hover:text-white transition-colors"
           >
             How I Work
           </a>
           <a
             href="#about"
             onClick={(e) => handleLandingLink(e, '#about')}
-            className="text-sm font-medium text-gray-400 hover:text-white transition-colors"
+            className="text-sm font-medium text-secondary hover:text-white transition-colors"
           >
             About
           </a>
@@ -154,21 +150,21 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
             <div className="px-6 py-8 flex flex-col gap-6">
               <a
                 href="#hero"
-                className="text-lg text-gray-300 hover:text-primary font-medium"
+                className="text-lg text-secondary hover:text-primary font-medium"
                 onClick={(e) => { handleLandingLink(e, '#hero'); setMobileMenuOpen(false); }}
               >
                 Home
               </a>
               <a
                 href="#how-i-work"
-                className="text-lg text-gray-300 hover:text-primary font-medium"
+                className="text-lg text-secondary hover:text-primary font-medium"
                 onClick={(e) => { handleLandingLink(e, '#how-i-work'); setMobileMenuOpen(false); }}
               >
                 How I Work
               </a>
               <a
                 href="#about"
-                className="text-lg text-gray-300 hover:text-primary font-medium"
+                className="text-lg text-secondary hover:text-primary font-medium"
                 onClick={(e) => { handleLandingLink(e, '#about'); setMobileMenuOpen(false); }}
               >
                 About
@@ -176,7 +172,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
 
               <button
                 onClick={() => { onNavigate('resources'); setMobileMenuOpen(false); }}
-                className={`text-lg text-left font-medium ${(currentView === 'resources' || currentView === 'article') ? 'text-primary' : 'text-gray-300'}`}
+                className={`text-lg text-left font-medium ${(currentView === 'resources' || currentView === 'article') ? 'text-primary' : 'text-secondary'}`}
               >
                 Insights
               </button>

@@ -83,7 +83,7 @@ const DecisionStack: React.FC = () => {
                         transition={{ delay: 0.85, duration: 0.3 }}
                         className="flex justify-center items-center text-gray-700"
                     >
-                        <ArrowDown className="w-4 h-4 opacity-50" />
+                        <ArrowDown className="w-4 h-4 text-secondary/20" />
                     </motion.div>
 
                     {/* Final Output - Clickable Button */}
@@ -115,7 +115,7 @@ const DecisionStack: React.FC = () => {
                             </div>
 
                             <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover/btn:bg-primary group-hover/btn:text-white transition-all duration-300">
-                                <ArrowRight className="w-4 h-4 text-gray-500 group-hover/btn:text-white transition-colors" />
+                                <ArrowRight className="w-4 h-4 text-secondary group-hover/btn:text-white transition-colors" />
                             </div>
                         </div>
                     </motion.a>
