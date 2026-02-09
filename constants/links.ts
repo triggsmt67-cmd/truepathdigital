@@ -12,5 +12,5 @@ export const SOCIAL_LINKS = {
 };
 
 export const CONTACT_LINKS = {
-  calendar: "https://calendly.com/truepath-strategy", // Placeholder for strategy call
+  calendar: "https://calendly.com/triggsmt67",
 };
