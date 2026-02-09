@@ -125,8 +125,61 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, isDarkMode, 
 
   useEffect(() => {
     if (fullArticle) {
+      // SEO: Normal Browser Title
       document.title = `${fullArticle.title} | True Path Digital`;
-      return () => { document.title = 'True Path Digital | Stop Guessing. Start Arriving.'; };
+
+      // SEO: Dynamic Meta Tags for traditional SERPs and AI Crawlers
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.setAttribute('content', fullArticle.excerpt || '');
+      }
+
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) ogTitle.setAttribute('content', fullArticle.title);
+
+      const ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc) ogDesc.setAttribute('content', fullArticle.excerpt || '');
+
+      // AI SEO: Inject JSON-LD Structured Data
+      // This is the "God Mode" for AI crawlers (Perplexity, OpenAI, etc.)
+      const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": fullArticle.title,
+        "description": fullArticle.excerpt,
+        "image": fullArticle.image,
+        "datePublished": fullArticle.publishDate,
+        "author": {
+          "@type": "Person",
+          "name": "Trevor Riggs",
+          "jobTitle": "Founder & Architect",
+          "url": SOCIAL_LINKS.linkedin
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "True Path Digital",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://admin.truepath406.com/wp-content/uploads/2025/12/Gemini_Generated_Image_gqrc0ygqrc0ygqrc.jpg"
+          }
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": window.location.href
+        }
+      };
+
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.id = 'article-structured-data';
+      script.text = JSON.stringify(structuredData);
+      document.head.appendChild(script);
+
+      return () => {
+        document.title = 'True Path Digital | Clear Thinking for Montana Business Owners';
+        const scriptToRemove = document.getElementById('article-structured-data');
+        if (scriptToRemove) scriptToRemove.remove();
+      };
     }
   }, [fullArticle]);
 
@@ -306,11 +359,12 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, isDarkMode, 
   }
 
   return (
-    <div className={`min-h-screen transition-colors duration-500 ${isDarkMode ? 'bg-[#121417] text-ice' : 'bg-slate-50 text-slate-900'} selection:bg-primary/30 pb-20`}>
+    <article className={`min-h-screen transition-colors duration-500 ${isDarkMode ? 'bg-[#121417] text-ice' : 'bg-slate-50 text-slate-900'} selection:bg-primary/30 pb-20`}>
       <motion.div className="fixed top-0 left-0 right-0 h-1 bg-primary z-[60] origin-left" style={{ scaleX }} />
 
       <button
         onClick={onToggleTheme}
+        aria-label="Toggle Theme"
         className={`fixed bottom-28 right-8 z-[60] p-4 rounded-full border transition-all shadow-xl group ${isDarkMode ? 'bg-white/5 border-white/10 text-white hover:border-primary/50' : 'bg-white border-slate-200 text-slate-900 hover:border-primary/50'
           }`}
       >
@@ -398,7 +452,7 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, isDarkMode, 
 
       <section className="pt-6 pb-20 px-6 relative z-10">
         <div className="max-w-[1400px] mx-auto grid lg:grid-cols-12 gap-16">
-          <div className="lg:col-span-8">
+          <main className="lg:col-span-8">
 
             <div className={`prose prose-lg md:prose-xl max-w-none transition-all duration-300 ${isDarkMode
               ? 'prose-invert prose-orange text-gray-300'
@@ -428,7 +482,7 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, isDarkMode, 
                 </button>
               </div>
             </div>
-          </div>
+          </main>
 
           <aside className="lg:col-span-4">
             <div className={`p-8 rounded-3xl border sticky top-32 transition-all ${isDarkMode ? 'bg-[#121417] border-white/10' : 'bg-white border-slate-200 shadow-xl'}`}>
@@ -448,7 +502,7 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, isDarkMode, 
           </aside>
         </div>
       </section>
-    </div>
+    </article >
   );
 };
 
