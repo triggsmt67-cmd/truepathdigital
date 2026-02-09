@@ -4,54 +4,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https: admin.truepath406.com; font-src 'self' https: data:; connect-src 'self' https:; frame-src 'self' https:;">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>True Path Digital | Stop Guessing. Start Arriving.</title>
-  <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/geist@1.2.1/dist/fonts/geist-sans/style.css" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Geist Sans', 'sans-serif'],
-          },
-          colors: {
-            background: '#121417',
-            primary: '#FF6B00',
-            secondary: '#C0C0C0',
-            silver: '#C0C0C0',
-            ice: '#F0F5F9',
-          },
-          animation: {
-            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    body {
-      background-color: #121417;
-      color: #F0F5F9;
-    }
+  <link rel="preconnect" href="https://admin.truepath406.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
 
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #121417;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #333;
-      border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: #FF6B00;
-    }
-  </style>
   <script type="importmap">
 {
   "imports": {

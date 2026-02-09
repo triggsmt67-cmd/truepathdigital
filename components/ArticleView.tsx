@@ -435,7 +435,7 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, isDarkMode, 
               <h4 className={`text-xs font-mono tracking-widest uppercase mb-6 ${isDarkMode ? 'text-gray-500' : 'text-slate-400'}`}>Published By</h4>
               <div className="flex items-center gap-4 mb-6">
                 <div className={`w-12 h-12 rounded-full overflow-hidden border ${isDarkMode ? 'border-primary/40' : 'border-primary/20'}`}>
-                  <img src="https://admin.truepath406.com/wp-content/uploads/2025/12/Gemini_Generated_Image_gqrc0ygqrc0ygqrc.jpg" className="w-full h-full object-cover filter grayscale" alt="Author" />
+                  <img src="https://admin.truepath406.com/wp-content/uploads/2025/12/Gemini_Generated_Image_gqrc0ygqrc0ygqrc.jpg" className="w-full h-full object-cover filter grayscale" alt="Author" loading="lazy" />
                 </div>
                 <div>
                   <div className={`font-bold text-lg transition-colors ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Trevor Riggs</div>

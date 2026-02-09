@@ -1,4 +1,4 @@
-
+import DOMPurify from 'dompurify';
 /**
  * Decodes common HTML entities into their plain-text equivalents.
  */
@@ -159,7 +159,7 @@ export const cleanWpHtml = (html: string, title: string, excerptPlain: string): 
     }
   });
 
-  return body.innerHTML;
+  return DOMPurify.sanitize(body.innerHTML);
 };
 
 import { NormalizedBlock } from '../types';
