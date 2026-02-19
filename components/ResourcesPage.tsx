@@ -128,23 +128,25 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({
             <div className="flex items-center justify-center gap-3 mb-8">
               <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-primary">The Intelligence Vault</span>
             </div>
-            <h1 className="text-3xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-white leading-[1.1] mb-8">
+            <h1 className={`text-3xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-[1.1] mb-8 transition-colors ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
               Clear thinking for when the <br className="hidden md:block" />
               right move isn’t obvious.
             </h1>
-            <p className="text-lg md:text-xl text-secondary max-w-2xl mx-auto font-light leading-relaxed mb-12">
+            <p className={`text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed mb-12 transition-colors ${isDarkMode ? 'text-secondary' : 'text-slate-600'}`}>
               Notes, frameworks, and field-tested insights on making better marketing decisions — without chasing trends or tools.
             </p>
             <div className="max-w-xl mx-auto relative group">
               <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none">
-                <Search className="w-4 h-4 text-white/20" />
+                <Search className={`w-4 h-4 transition-colors ${isDarkMode ? 'text-white/20' : 'text-slate-400'}`} />
               </div>
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search by question, not keyword…"
-                className="w-full border border-white/5 rounded-full py-4 pl-12 pr-6 bg-white/[0.02] text-white focus:outline-none focus:border-white/10 transition-all placeholder:text-white/20 text-sm"
+                className={`w-full border rounded-full py-4 pl-12 pr-6 transition-all text-sm outline-none ${isDarkMode
+                  ? 'border-white/5 bg-white/[0.02] text-white focus:border-white/10 placeholder:text-white/20'
+                  : 'border-slate-200 bg-white text-slate-900 focus:border-primary placeholder:text-slate-400 focus:ring-1 focus:ring-primary/20 shadow-sm'}`}
               />
             </div>
           </motion.div>
@@ -157,8 +159,8 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({
           <button
             onClick={() => setSelectedCategorySlug(null)}
             className={`px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap border transition-all ${!selectedCategorySlug
-                ? 'bg-primary border-primary text-white shadow-lg shadow-primary/20'
-                : isDarkMode ? 'bg-white/5 border-white/10 text-secondary' : 'bg-white border-slate-200 text-slate-600'
+              ? 'bg-primary border-primary text-white shadow-lg shadow-primary/20'
+              : isDarkMode ? 'bg-white/5 border-white/10 text-secondary' : 'bg-white border-slate-200 text-slate-600'
               }`}
           >
             All Thinking
@@ -168,8 +170,8 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({
               key={cat.id}
               onClick={() => handleCategoryClick(cat.slug)}
               className={`px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap border transition-all ${selectedCategorySlug === cat.slug
-                  ? 'bg-primary border-primary text-white shadow-lg shadow-primary/20'
-                  : isDarkMode ? 'bg-white/5 border-white/10 text-secondary' : 'bg-white border-slate-200 text-slate-600'
+                ? 'bg-primary border-primary text-white shadow-lg shadow-primary/20'
+                : isDarkMode ? 'bg-white/5 border-white/10 text-secondary' : 'bg-white border-slate-200 text-slate-600'
                 }`}
             >
               {cat.name}
@@ -206,7 +208,7 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({
                       </h2>
                     </div>
                   </div>
-                  <p className="text-xl max-w-3xl leading-relaxed text-secondary font-light">
+                  <p className={`text-xl max-w-3xl leading-relaxed font-light transition-colors ${isDarkMode ? 'text-secondary' : 'text-slate-600'}`}>
                     {activeCategory?.description || "Strategic observations, technical notes, and conversion frameworks from the field."}
                   </p>
                 </div>
@@ -258,8 +260,8 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({
                         </div>
 
                         <div className={`flex items-center justify-center w-12 h-12 rounded-full border transition-all ${isDarkMode
-                            ? 'bg-white/5 border-white/10 text-secondary/40 group-hover:bg-primary group-hover:border-primary group-hover:text-white'
-                            : 'bg-slate-50 border-slate-200 text-slate-400 group-hover:bg-primary group-hover:border-primary group-hover:text-white'
+                          ? 'bg-white/5 border-white/10 text-secondary/40 group-hover:bg-primary group-hover:border-primary group-hover:text-white'
+                          : 'bg-slate-50 border-slate-200 text-slate-400 group-hover:bg-primary group-hover:border-primary group-hover:text-white'
                           }`}>
                           <ChevronRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
                         </div>

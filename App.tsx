@@ -131,19 +131,22 @@ const AppContent = () => {
 
   return (
     <div className={`min-h-screen font-sans selection:bg-primary selection:text-white relative overflow-x-hidden transition-colors duration-500 ${isDarkMode ? 'bg-background text-ice' : 'bg-slate-50 text-slate-900'}`}>
+      <div className="grain-overlay" />
       <WipeOverlay isWiping={isWiping} />
+
       <ScrollTopProgress onBackToTop={handleBackToTop} />
 
       <div className="fixed inset-0 z-0 pointer-events-none flex justify-center">
-        <div className="w-full max-w-[1400px] h-full border-l border-white/[0.03] border-r border-white/[0.03] flex justify-between">
+        <div className={`w-full max-w-[1400px] h-full border-l border-r flex justify-between transition-colors ${isDarkMode ? 'border-white/[0.03]' : 'border-slate-200/50'}`}>
           {[...Array(6)].map((_, i) => (
-            <div key={i} className="h-full w-px bg-white/[0.03]"></div>
+            <div key={i} className={`h-full w-px transition-colors ${isDarkMode ? 'bg-white/[0.03]' : 'bg-slate-200/30'}`}></div>
           ))}
         </div>
       </div>
 
       <div className="relative z-10">
-        <Navbar currentView={currentView} onNavigate={(view) => navigateWithWipe(view)} />
+        <Navbar currentView={currentView} onNavigate={(view) => navigateWithWipe(view)} isDarkMode={isDarkMode} />
+
         <main>
           <AnimatePresence mode="wait">
             <div key={location.pathname}>

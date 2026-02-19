@@ -2,6 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Activity, Users, MapPin, BrainCircuit, CheckCircle2, ArrowDown, ArrowRight } from 'lucide-react';
 import { CONTACT_LINKS } from '../constants/links';
+import { SpotlightCard } from './SpotlightCard';
+
 
 const stackItems = [
     {
@@ -10,7 +12,8 @@ const stackItems = [
         icon: Activity,
         color: 'text-blue-400',
         bg: 'bg-blue-400/10',
-        border: 'border-blue-400/20'
+        border: 'border-blue-400/20',
+        spotlight: 'rgba(96, 165, 250, 0.15)'
     },
     {
         title: 'Buyer Behavior',
@@ -18,7 +21,8 @@ const stackItems = [
         icon: Users,
         color: 'text-purple-400',
         bg: 'bg-purple-400/10',
-        border: 'border-purple-400/20'
+        border: 'border-purple-400/20',
+        spotlight: 'rgba(192, 132, 252, 0.15)'
     },
     {
         title: 'Local Market Context',
@@ -26,7 +30,8 @@ const stackItems = [
         icon: MapPin,
         color: 'text-emerald-400',
         bg: 'bg-emerald-400/10',
-        border: 'border-emerald-400/20'
+        border: 'border-emerald-400/20',
+        spotlight: 'rgba(52, 211, 153, 0.15)'
     },
     {
         title: 'AI Analysis',
@@ -34,11 +39,17 @@ const stackItems = [
         icon: BrainCircuit,
         color: 'text-orange-400',
         bg: 'bg-orange-400/10',
-        border: 'border-orange-400/20'
+        border: 'border-orange-400/20',
+        spotlight: 'rgba(251, 146, 60, 0.15)'
     }
 ];
 
-const DecisionStack: React.FC = () => {
+interface DecisionStackProps {
+    disableSpotlight?: boolean;
+}
+
+const DecisionStack: React.FC<DecisionStackProps> = ({ disableSpotlight = false }) => {
+
     return (
         <div className="w-full max-w-md mx-auto">
             <div className="rounded-[32px] bg-background/80 backdrop-blur-xl border border-white/10 overflow-hidden shadow-2xl">
@@ -60,21 +71,29 @@ const DecisionStack: React.FC = () => {
                             initial={{ opacity: 0, y: 15 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 + (index * 0.15), duration: 0.5, ease: "easeOut" }}
-                            className={`relative z-10 flex items-center gap-4 p-4 rounded-2xl border bg-background ${item.border} border-opacity-30`}
+                            className="relative z-10"
                         >
-                            <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${item.bg} ${item.color} opacity-90`}>
-                                <item.icon className="w-4 h-4" />
-                            </div>
-                            <div>
-                                <div className={`font-semibold text-sm mb-0.5 text-gray-200`}>
-                                    {item.title}
+                            <SpotlightCard
+                                className={`flex items-center gap-4 p-4 rounded-2xl border bg-background/50 ${item.border} border-opacity-30`}
+                                spotlightColor={item.spotlight}
+                                disabled={disableSpotlight}
+                            >
+
+                                <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${item.bg} ${item.color} opacity-90`}>
+                                    <item.icon className="w-4 h-4" />
                                 </div>
-                                <div className="text-xs text-secondary/60 font-medium leading-snug">
-                                    {item.subtitle}
+                                <div>
+                                    <div className={`font-semibold text-sm mb-0.5 text-gray-200`}>
+                                        {item.title}
+                                    </div>
+                                    <div className="text-xs text-secondary/60 font-medium leading-snug">
+                                        {item.subtitle}
+                                    </div>
                                 </div>
-                            </div>
+                            </SpotlightCard>
                         </motion.div>
                     ))}
+
 
                     {/* Flow Indicator to Final Decision */}
                     <motion.div
@@ -98,8 +117,9 @@ const DecisionStack: React.FC = () => {
                         transition={{ delay: 1.25, duration: 0.6, type: "spring", stiffness: 100 }}
                         className="relative z-10 block cursor-pointer group/btn no-underline"
                     >
-                        <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/30 to-orange-600/30 rounded-2xl blur opacity-0 group-hover/btn:opacity-50 transition-opacity duration-500"></div>
-                        <div className="relative flex items-center justify-between p-5 rounded-2xl border border-primary/40 bg-background shadow-[0_10px_30px_-10px_rgba(0,0,0,0.3)] group-hover/btn:border-primary/60 group-hover/btn:shadow-[0_15px_35px_-10px_rgba(255,107,0,0.15)] transition-all duration-300">
+                        <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/30 to-amber-900/40 rounded-2xl blur opacity-0 group-hover/btn:opacity-50 transition-opacity duration-500"></div>
+                        <div className="relative flex items-center justify-between p-5 rounded-2xl border border-primary/40 bg-background shadow-[0_10px_30px_-10px_rgba(0,0,0,0.3)] group-hover/btn:border-primary/60 group-hover/btn:shadow-[0_15px_35px_-10px_rgba(180,83,9,0.2)] transition-all duration-300">
+
                             <div className="flex items-center gap-4">
                                 <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center shrink-0 shadow-lg shadow-primary/20 opacity-90 group-hover/btn:opacity-100 transition-opacity">
                                     <CheckCircle2 className="w-5 h-5 text-white" />

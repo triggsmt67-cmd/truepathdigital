@@ -5,6 +5,9 @@ import { ArrowRight, CheckCircle2, TrendingUp, TrendingDown, Zap } from 'lucide-
 import { CONTACT_LINKS } from '../constants/links';
 import DecisionStack from './DecisionStack';
 
+import { RevealText } from './RevealText';
+import { Magnetic } from './Magnetic';
+
 const Hero: React.FC = () => {
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -71,10 +74,18 @@ const Hero: React.FC = () => {
               </span>
             </motion.div>
 
-            {/* Heading */}
-            <motion.h1 variants={itemVariants} className="text-3xl sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5.5rem] font-semibold text-white tracking-tighter leading-[1] md:leading-[0.9] mb-6 md:mb-8">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-primary to-white inline">Clear marketing decisions</span> <br className="sm:hidden" /> for Montana business owners
-            </motion.h1>
+            {/* Heading with Reveal effect */}
+            <h1 className="mb-6 md:mb-8 font-semibold tracking-tighter leading-[1.2] md:leading-[1.1]">
+              <RevealText
+                text="Clear marketing decisions for Montana business owners"
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5.5rem]"
+                highlightWords={["marketing", "decisions"]}
+                highlightClassName="text-transparent bg-clip-text bg-gradient-to-br from-[#fbbf24] via-primary to-[#78350f]"
+
+                delay={0.5}
+              />
+            </h1>
+
 
             {/* Subhead */}
             <motion.p variants={itemVariants} className="text-lg md:text-2xl text-secondary mb-8 md:mb-10 max-w-2xl leading-relaxed font-normal">
@@ -83,18 +94,22 @@ const Hero: React.FC = () => {
 
             {/* CTA Group */}
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto">
-              <a
-                href={CONTACT_LINKS.calendar}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative inline-flex h-14 overflow-hidden rounded-full p-[2px] focus:outline-none group shadow-[0_0_50px_-10px_rgba(255,107,0,0.5)] w-full sm:w-auto transition-transform hover:scale-105 active:scale-95 duration-200"
-              >
-                <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#000000_0%,#FF6B00_50%,#000000_100%)]" />
-                <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-background px-8 text-lg font-medium text-white backdrop-blur-3xl gap-3 transition-all group-hover:bg-[#111] group-hover:text-primary">
-                  Start with a conversation
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </a>
+              <Magnetic amount={0.2}>
+                <a
+                  href={CONTACT_LINKS.calendar}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative inline-flex h-14 overflow-hidden rounded-full p-[1px] focus:outline-none group shadow-[0_0_40px_-5px_rgba(180,83,9,0.35)] w-full sm:w-auto transition-all hover:scale-[1.02] active:scale-95 duration-300"
+
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-primary/40 via-primary/80 to-primary/40 opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
+                  <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-[#0a0a0a] px-8 text-lg font-medium text-white backdrop-blur-3xl gap-3 transition-colors group-hover:bg-background">
+                    Start with a conversation
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  </span>
+                </a>
+
+              </Magnetic>
 
               <div className="flex items-center gap-2 text-sm text-secondary">
                 <CheckCircle2 className="w-4 h-4 text-primary" />
@@ -103,6 +118,7 @@ const Hero: React.FC = () => {
             </motion.div>
           </motion.div>
 
+
           {/* RIGHT COLUMN: Intelligent Decision Stack */}
           <motion.div
             initial={{ opacity: 0, x: 40, scale: 0.95 }}
@@ -110,7 +126,8 @@ const Hero: React.FC = () => {
             transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
             className="relative block w-full mt-12 lg:mt-0"
           >
-            <DecisionStack />
+            <DecisionStack disableSpotlight={true} />
+
           </motion.div>
         </div>
       </div>

@@ -70,11 +70,11 @@ const BlogIndexSidebar: React.FC<BlogIndexSidebarProps> = ({
                             <button
                                 key={cat.id}
                                 onClick={() => onCategoryClick(cat.slug)}
-                                className={`flex items-center justify-between group px-4 py-3 rounded-xl border transition-all ${isActive
-                                    ? 'bg-primary/10 border-primary/30 text-primary'
+                                className={`flex items-center justify-between group px-4 py-3 rounded-xl border transition-all duration-300 backdrop-blur-sm ${isActive
+                                    ? 'bg-primary/10 border-primary/40 text-primary shadow-[0_0_20px_-5px_rgba(180,83,9,0.2)]'
                                     : isDarkMode
-                                        ? 'bg-white/[0.02] border-white/5 text-secondary hover:border-white/10 hover:bg-white/[0.04]'
-                                        : 'bg-white border-slate-200 text-slate-600 hover:border-primary hover:shadow-sm'
+                                        ? 'bg-white/[0.02] border-white/5 text-secondary hover:border-white/20 hover:bg-white/[0.05] hover:shadow-lg'
+                                        : 'bg-white border-slate-200 text-slate-600 hover:border-primary hover:shadow-md'
                                     }`}
                             >
                                 <div className="flex items-center gap-3">
@@ -105,46 +105,51 @@ const BlogIndexSidebar: React.FC<BlogIndexSidebarProps> = ({
                         <button
                             key={idx}
                             onClick={() => onNavigate(link.href)}
-                            className="group text-left"
+                            className="group text-left p-2 -mx-2 rounded-2xl transition-all hover:bg-white/[0.02]"
                         >
                             <div className="flex items-start gap-4">
-                                <div className={`mt-1 flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center border transition-all ${isDarkMode
-                                    ? 'bg-white/[0.03] border-white/10 text-primary group-hover:border-primary/50'
-                                    : 'bg-slate-50 border-slate-200 text-primary group-hover:border-primary'
+                                <div className={`mt-1 flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center border transition-all duration-300 ${isDarkMode
+                                    ? 'bg-white/[0.03] border-white/10 text-primary group-hover:border-primary/50 group-hover:bg-primary/10 shadow-sm'
+                                    : 'bg-slate-50 border-slate-200 text-primary group-hover:border-primary shadow-sm'
                                     }`}>
-                                    <Bookmark className="w-3.5 h-3.5" />
+                                    <Bookmark className="w-4 h-4" />
                                 </div>
-                                <div className="space-y-1.5">
-                                    <span className={`block text-xs font-bold leading-tight transition-colors ${isDarkMode ? 'text-white group-hover:text-primary' : 'text-slate-900 group-hover:text-primary'
+                                <div className="space-y-1.5 flex-1">
+                                    <span className={`block text-[13px] font-bold leading-tight transition-colors ${isDarkMode ? 'text-white group-hover:text-primary' : 'text-slate-900 group-hover:text-primary'
                                         }`}>
                                         {link.title}
                                     </span>
                                     {link.shortLabel && (
-                                        <p className={`text-[11px] leading-relaxed ${isDarkMode ? 'text-secondary/40' : 'text-slate-500'}`}>
+                                        <p className={`text-[11px] leading-relaxed font-light transition-colors ${isDarkMode ? 'text-secondary/40' : 'text-slate-500'}`}>
                                             {link.shortLabel}
                                         </p>
                                     )}
+                                </div>
+                                <div className="opacity-0 group-hover:opacity-100 transition-opacity self-center">
+                                    <ArrowRight className="w-3.5 h-3.5 text-primary" />
                                 </div>
                             </div>
                         </button>
                     ))}
                 </nav>
 
-                <div className={`mt-10 p-6 rounded-2xl border transition-all ${isDarkMode ? 'bg-primary/5 border-primary/20' : 'bg-orange-50 border-orange-100'
+                <div className={`mt-10 p-8 rounded-3xl border transition-all relative overflow-hidden ${isDarkMode ? 'bg-primary/5 border-primary/20 shadow-2xl shadow-primary/5' : 'bg-orange-50 border-orange-100 shadow-sm'
                     }`}>
-                    <h5 className={`text-[10px] font-bold uppercase tracking-[0.2em] mb-3 text-primary`}>Newsletter</h5>
-                    <p className={`text-[11px] leading-relaxed mb-4 ${isDarkMode ? 'text-secondary/60' : 'text-slate-600'}`}>
-                        Direct, technical insights on AI & conversion strategy.
+                    <div className={`absolute -top-12 -right-12 w-24 h-24 blur-3xl rounded-full bg-primary/20 pointer-events-none`} />
+                    <h5 className={`text-[10px] font-bold uppercase tracking-[0.25em] mb-4 text-primary`}>Vault Access</h5>
+                    <p className={`text-xs leading-relaxed mb-6 font-light ${isDarkMode ? 'text-secondary/70' : 'text-slate-600'}`}>
+                        Direct, technical insights on AI & conversion strategy delivered to your inbox.
                     </p>
-                    <div className="flex gap-2">
+                    <div className="flex flex-col gap-3">
                         <input
                             type="email"
-                            placeholder="Email..."
-                            className={`flex-1 text-[11px] px-3 py-2 rounded-lg border bg-transparent focus:outline-none focus:border-primary/50 ${isDarkMode ? 'border-white/10 text-white placeholder:text-secondary/20' : 'border-slate-300 text-slate-900'
+                            placeholder="Your email address"
+                            className={`w-full text-xs px-4 py-3 rounded-xl border bg-transparent focus:outline-none focus:border-primary/50 transition-all font-light ${isDarkMode ? 'border-white/10 text-white placeholder:text-secondary/30 focus:bg-white/[0.02]' : 'border-slate-300 text-slate-900'
                                 }`}
                         />
-                        <button className="p-2 bg-primary text-white rounded-lg hover:bg-orange-600 transition-colors">
-                            <ArrowRight className="w-4 h-4" />
+                        <button className="w-full py-3 bg-primary text-white rounded-xl hover:bg-[#92400e] transition-all font-bold text-xs flex items-center justify-center gap-2 group/sub shadow-lg shadow-primary/20 active:scale-[0.98]">
+                            Join the Vault
+                            <ArrowRight className="w-3.5 h-3.5 group-hover/sub:translate-x-1 transition-transform" />
                         </button>
                     </div>
                 </div>

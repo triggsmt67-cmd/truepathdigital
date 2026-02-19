@@ -3,6 +3,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, ShieldCheck, FileText, ArrowRight } from 'lucide-react';
 import { SOCIAL_LINKS } from '../constants/links';
+import { Magnetic } from './Magnetic';
+
 
 const AboutSection: React.FC = () => {
   return (
@@ -80,19 +82,24 @@ const AboutSection: React.FC = () => {
 
             {/* Final CTA Button */}
             <div className="text-center sm:text-left">
-              <a
-                href={SOCIAL_LINKS.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative inline-flex h-14 overflow-hidden rounded-full p-[2px] focus:outline-none group shadow-[0_0_50px_-10px_rgba(255,107,0,0.5)] w-full sm:w-auto"
-              >
-                <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#000000_0%,#FF6B00_50%,#000000_100%)]" />
-                <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-background px-8 text-lg font-medium text-white backdrop-blur-3xl gap-3 transition-colors group-hover:bg-[#111]">
-                  Start with a conversation
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </a>
+              <Magnetic amount={0.2}>
+                <a
+                  href={SOCIAL_LINKS.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative inline-flex h-14 overflow-hidden rounded-full p-[1px] focus:outline-none group shadow-[0_0_40px_-5px_rgba(180,83,9,0.35)] w-full sm:w-auto transition-all hover:scale-[1.02] active:scale-95 duration-300"
+
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-primary/40 via-primary/80 to-primary/40 opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
+                  <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-[#0a0a0a] px-8 text-lg font-medium text-white backdrop-blur-3xl gap-3 transition-colors group-hover:bg-background">
+                    Start with a conversation
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  </span>
+                </a>
+
+              </Magnetic>
             </div>
+
 
           </motion.div>
         </div>

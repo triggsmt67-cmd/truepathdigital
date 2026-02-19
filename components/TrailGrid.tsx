@@ -17,7 +17,8 @@ const TrailGrid: React.FC = () => {
                         transition={{ duration: 0.8 }}
                     >
                         <span className="text-primary font-mono text-sm tracking-widest uppercase mb-4 block font-medium">Methodology</span>
-                        <h2 className="text-3xl md:text-6xl lg:text-7xl font-semibold text-white tracking-tight leading-[0.95] mb-8">
+                        <h2 className="text-3xl md:text-6xl lg:text-7xl font-semibold text-white tracking-normal leading-[0.95] mb-8">
+
                             How I Work
                         </h2>
                         <div className="p-8 rounded-3xl bg-white/[0.02] border border-white/10 relative group overflow-hidden">

@@ -485,19 +485,33 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, isDarkMode, 
           </main>
 
           <aside className="lg:col-span-4">
-            <div className={`p-8 rounded-3xl border sticky top-32 transition-all ${isDarkMode ? 'bg-[#121417] border-white/10' : 'bg-white border-slate-200 shadow-xl'}`}>
-              <h4 className={`text-xs font-mono tracking-widest uppercase mb-6 ${isDarkMode ? 'text-gray-500' : 'text-slate-400'}`}>Published By</h4>
-              <div className="flex items-center gap-4 mb-6">
-                <div className={`w-12 h-12 rounded-full overflow-hidden border ${isDarkMode ? 'border-primary/40' : 'border-primary/20'}`}>
-                  <img src="https://admin.truepath406.com/wp-content/uploads/2025/12/Gemini_Generated_Image_gqrc0ygqrc0ygqrc.jpg" className="w-full h-full object-cover filter grayscale" alt="Author" loading="lazy" />
+            <div className={`p-8 rounded-3xl border sticky top-32 transition-all relative overflow-hidden ${isDarkMode ? 'bg-[#121417]/80 backdrop-blur-md border-white/10' : 'bg-white border-slate-200 shadow-xl'}`}>
+              <div className={`absolute -top-10 -left-10 w-32 h-32 blur-[80px] rounded-full opacity-30 pointer-events-none ${isDarkMode ? 'bg-primary' : 'bg-primary/20'}`} />
+
+              <h4 className={`text-[10px] font-bold tracking-[0.25em] uppercase mb-8 transition-colors ${isDarkMode ? 'text-gray-500' : 'text-slate-400'}`}>Published By</h4>
+
+              <div className="flex items-center gap-5 mb-8 relative z-10">
+                <div className={`w-14 h-14 rounded-2xl overflow-hidden border p-0.5 transition-colors ${isDarkMode ? 'border-primary/40 bg-primary/10' : 'border-primary/20 bg-primary/5'}`}>
+                  <img src="https://admin.truepath406.com/wp-content/uploads/2025/12/Gemini_Generated_Image_gqrc0ygqrc0ygqrc.jpg" className="w-full h-full object-cover rounded-[14px] filter grayscale group-hover:grayscale-0 transition-all" alt="Author" loading="lazy" />
                 </div>
                 <div>
-                  <div className={`font-bold text-lg transition-colors ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Trevor Riggs</div>
-                  <div className="text-primary text-xs font-mono uppercase tracking-widest">Founder / Architect</div>
+                  <div className={`font-bold text-xl tracking-tight transition-colors ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>Trevor Riggs</div>
+                  <div className="text-primary text-[10px] font-bold uppercase tracking-[0.15em]">Founder / Architect</div>
                 </div>
               </div>
-              <p className={`text-sm leading-relaxed mb-6 transition-colors ${isDarkMode ? 'text-gray-500' : 'text-slate-600'}`}>25+ years engineering high-conversion sales systems and digital infrastructure.</p>
-              <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="block w-full py-3 rounded-xl bg-primary text-white font-bold text-sm text-center transition-transform hover:scale-105 shadow-[0_10px_20px_-5px_rgba(255,107,0,0.3)]">Connect on LinkedIn</a>
+
+              <p className={`text-sm leading-relaxed mb-10 transition-colors font-light ${isDarkMode ? 'text-secondary/70' : 'text-slate-600'}`}>
+                25+ years engineering high-conversion sales systems and strategic digital infrastructure for high-growth firms.
+              </p>
+
+              <a
+                href={SOCIAL_LINKS.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full py-4 rounded-xl bg-primary text-white font-bold text-sm text-center transition-all hover:scale-[1.02] active:scale-98 shadow-[0_10px_30px_-5px_rgba(180,83,9,0.3)] hover:shadow-[0_15px_35px_-5px_rgba(180,83,9,0.4)]"
+              >
+                Connect on LinkedIn
+              </a>
             </div>
           </aside>
         </div>
