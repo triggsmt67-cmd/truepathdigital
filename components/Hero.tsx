@@ -99,11 +99,11 @@ const Hero: React.FC = () => {
                   href={CONTACT_LINKS.calendar}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative inline-flex h-14 overflow-hidden rounded-full p-[1px] focus:outline-none group shadow-[0_0_40px_-5px_rgba(180,83,9,0.35)] w-full sm:w-auto transition-all hover:scale-[1.02] active:scale-95 duration-300"
+                  className="relative inline-flex h-16 overflow-hidden rounded-full p-[1px] focus:outline-none group shadow-[0_0_40px_-5px_rgba(180,83,9,0.35)] w-full sm:w-auto transition-all hover:scale-[1.02] active:scale-95 duration-300"
 
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-primary/40 via-primary/80 to-primary/40 opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
-                  <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-[#0a0a0a] px-8 text-lg font-medium text-white backdrop-blur-3xl gap-3 transition-colors group-hover:bg-background">
+                  <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-[#0a0a0a] px-10 text-base font-medium text-white backdrop-blur-3xl gap-3 transition-colors group-hover:bg-background whitespace-nowrap">
                     Start with a conversation
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                   </span>
@@ -112,8 +112,8 @@ const Hero: React.FC = () => {
               </Magnetic>
 
               <div className="flex items-center gap-2 text-sm text-secondary">
-                <CheckCircle2 className="w-4 h-4 text-primary" />
-                <span>Direct partner access</span>
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                <span className="md:whitespace-nowrap">Find out what to turn off before you spend another dime.</span>
               </div>
             </motion.div>
           </motion.div>

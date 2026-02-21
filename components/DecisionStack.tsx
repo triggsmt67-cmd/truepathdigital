@@ -126,10 +126,10 @@ const DecisionStack: React.FC<DecisionStackProps> = ({ disableSpotlight = false 
                                 </div>
                                 <div>
                                     <div className="font-bold text-white text-[1.05rem] mb-0.5 group-hover/btn:text-primary transition-colors duration-300">
-                                        Your Clear Next Move
+                                        Review My Current Setup
                                     </div>
-                                    <div className="text-xs text-primary/80 font-medium tracking-wide group-hover/btn:text-white/70 transition-colors duration-300">
-                                        Turn insight into a confident decision
+                                    <div className="text-xs text-secondary/60 font-medium leading-relaxed group-hover/btn:text-white/70 transition-colors duration-300">
+                                        ↳ Takes 15 minutes. No sales pitch. <br />I'll call your cell.
                                     </div>
                                 </div>
                             </div>
