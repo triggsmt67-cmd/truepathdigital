@@ -1,0 +1,31 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# B) Block indexing: Set X-Robots-Tag for all requests
+Header set X-Robots-Tag "noindex, nofollow"
+
+# Check if the host is the admin subdomain
+RewriteCond %{HTTP_HOST} ^admin\.truepath406\.com$ [NC]
+
+# A) Exclude core WP admin, API, and static paths from being redirected
+RewriteCond %{REQUEST_URI} !^/(wp-admin|wp-login\.php|graphql|wp-json|xmlrpc\.php|wp-content|wp-includes|robots\.txt|sitemap.*\.xml) [NC]
+
+# Exclude empty root path if you want (optional, but usually root should just 404 or redirect)
+# RewriteCond %{REQUEST_URI} !^/$
+
+# A) Redirect all other requests (public posts) to Next.js / React frontend
+# The rule captures the request path (slug) and redirects to /blog/slug
+RewriteRule ^/?(.*)$ https://truepath406.com/blog/$1 [R=301,L]
+</IfModule>
+
+# BEGIN WordPress
+# (Your standard WordPress rules would follow here)
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+# END WordPress

@@ -140,6 +140,23 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, isDarkMode, 
       const ogDesc = document.querySelector('meta[property="og:description"]');
       if (ogDesc) ogDesc.setAttribute('content', fullArticle.excerpt || '');
 
+      // Check for og:url and canonical links, and create/update them
+      let ogUrl = document.querySelector('meta[property="og:url"]');
+      if (!ogUrl) {
+        ogUrl = document.createElement('meta');
+        ogUrl.setAttribute('property', 'og:url');
+        document.head.appendChild(ogUrl);
+      }
+      ogUrl.setAttribute('content', `https://truepath406.com/blog/${fullArticle.slug}`);
+
+      let canonical = document.querySelector('link[rel="canonical"]');
+      if (!canonical) {
+        canonical = document.createElement('link');
+        canonical.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonical);
+      }
+      canonical.setAttribute('href', `https://truepath406.com/blog/${fullArticle.slug}`);
+
       // AI SEO: Inject JSON-LD Structured Data
       // This is the "God Mode" for AI crawlers (Perplexity, OpenAI, etc.)
       const structuredData = {
@@ -179,6 +196,12 @@ const ArticleView: React.FC<ArticleViewProps> = ({ article, onBack, isDarkMode, 
         document.title = 'True Path Digital | Clear Thinking for Montana Business Owners';
         const scriptToRemove = document.getElementById('article-structured-data');
         if (scriptToRemove) scriptToRemove.remove();
+
+        let canonicalToRemove = document.querySelector('link[rel="canonical"]');
+        if (canonicalToRemove) canonicalToRemove.remove();
+
+        let ogUrlToRemove = document.querySelector('meta[property="og:url"]');
+        if (ogUrlToRemove) ogUrlToRemove.remove();
       };
     }
   }, [fullArticle]);
