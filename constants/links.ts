@@ -8,7 +8,7 @@ export const SOCIAL_LINKS = {
   twitter: "https://x.com/truepathdigital", // Placeholder
   instagram: "https://instagram.com/truepathdigital", // Placeholder
   facebook: "https://facebook.com/truepathdigital", // Placeholder
-  email: "trevor@truepathdigital.com", // Placeholder
+  email: "trevor@truepath406.com", // Placeholder
 };
 
 export const CONTACT_LINKS = {
